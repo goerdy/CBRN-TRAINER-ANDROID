@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/bluetoothModeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth-Modus"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/savedBeaconsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gespeicherte Beacons:"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/bluetoothModeTitle"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/savedBeaconsList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/savedBeaconsTitle"
+        app:layout_constraintBottom_toTopOf="@id/noBeaconsMessage"/>
+
+    <TextView
+        android:id="@+id/noBeaconsMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Keine Beacons gespeichert. Bitte fügen Sie Beacons in den Bluetooth-Einstellungen hinzu oder scannen Sie den QR-Code auf einem Beacon."
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/settingsButton"/>
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth-Einstellungen"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/scanQrButton"/>
+
+    <Button
+        android:id="@+id/scanQrButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="QR-Code scannen"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/backButton"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zurück zum Hauptmenü"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

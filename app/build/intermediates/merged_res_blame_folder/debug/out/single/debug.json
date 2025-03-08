@@ -1,0 +1,110 @@
+[
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_calibration.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_calibration.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_instructions.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_instructions.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/raw_geiger_click.wav.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/raw/geiger_click.wav"
+    },
+    {
+        "merged": "com.example.myapp-merged_res-32:/drawable_ic_magnet_new.xml.flat",
+        "source": "com.example.myapp-main-34:/drawable/ic_magnet_new.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/drawable_ic_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_item_beacon.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/item_beacon.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_session_input.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_session_input.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/drawable_ic_bluetooth.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/drawable/ic_bluetooth.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/drawable_ic_magnet.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/drawable/ic_magnet.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_signal_strength.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_signal_strength.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_magnet_mode.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_magnet_mode.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_item_saved_beacon.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/item_saved_beacon.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_main.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/drawable_ic_exit.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/drawable/ic_exit.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_beacon_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_beacon_settings.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_web_view.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_web_view.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_dosisleistungsmess.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_dosisleistungsmess.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_item_saved_beacon_simple.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/item_saved_beacon_simple.xml"
+    },
+    {
+        "merged": "com.example.myapp-merged_res-32:/layout_activity_main.xml.flat",
+        "source": "com.example.myapp-main-34:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/drawable_ic_info.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/drawable/ic_info.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_bluetooth_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_bluetooth_settings.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_beacon_item.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/beacon_item.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_bluetooth_mode.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_bluetooth_mode.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-merged_res-32:/layout_activity_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/com.example.myapp-main-34:/layout/activity_settings.xml"
+    }
+]
