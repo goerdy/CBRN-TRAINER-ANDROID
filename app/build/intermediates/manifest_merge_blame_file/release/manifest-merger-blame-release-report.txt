@@ -1,0 +1,333 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="de.cbrntrainer"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.BLUETOOTH" />
+11-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:5:5-67
+11-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:5:22-65
+12    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+12-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:6:5-73
+12-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:6:22-71
+13    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+13-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:7:5-73
+13-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:7:22-70
+14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+14-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:8:5-78
+14-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:8:22-76
+15    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+15-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:9:5-80
+15-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:9:22-78
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:10:5-67
+16-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:10:22-64
+17    <uses-permission android:name="android.permission.CAMERA" />
+17-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:11:5-65
+17-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:11:22-62
+18    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+18-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:12:5-76
+18-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:12:22-73
+19    <uses-permission android:name="android.permission.VIBRATE" />
+19-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:13:5-65
+19-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:13:22-63
+20
+21    <uses-feature
+21-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:14:5-84
+22        android:name="android.hardware.camera"
+22-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:14:19-57
+23        android:required="true" />
+23-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:14:58-81
+24
+25    <permission
+25-->[androidx.core:core:1.12.0] /home/goerdy/.gradle/caches/8.12/transforms/85cceb1472d53ab6aefef8c6f06b731d/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+26        android:name="de.cbrntrainer.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+26-->[androidx.core:core:1.12.0] /home/goerdy/.gradle/caches/8.12/transforms/85cceb1472d53ab6aefef8c6f06b731d/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+27        android:protectionLevel="signature" />
+27-->[androidx.core:core:1.12.0] /home/goerdy/.gradle/caches/8.12/transforms/85cceb1472d53ab6aefef8c6f06b731d/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+28
+29    <uses-permission android:name="de.cbrntrainer.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+29-->[androidx.core:core:1.12.0] /home/goerdy/.gradle/caches/8.12/transforms/85cceb1472d53ab6aefef8c6f06b731d/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+29-->[androidx.core:core:1.12.0] /home/goerdy/.gradle/caches/8.12/transforms/85cceb1472d53ab6aefef8c6f06b731d/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+30
+31    <uses-feature
+31-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:28:5-30:36
+32        android:name="android.hardware.camera.front"
+32-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:29:9-53
+33        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
+33-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:30:9-33
+34    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
+35    <uses-feature
+35-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:33:5-35:36
+36        android:name="android.hardware.camera.autofocus"
+36-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:34:9-57
+37        android:required="false" />
+37-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:35:9-33
+38    <uses-feature
+38-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:36:5-38:36
+39        android:name="android.hardware.camera.flash"
+39-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:37:9-53
+40        android:required="false" />
+40-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:38:9-33
+41    <uses-feature
+41-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:39:5-41:36
+42        android:name="android.hardware.screen.landscape"
+42-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:40:9-57
+43        android:required="false" />
+43-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:41:9-33
+44    <uses-feature
+44-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:42:5-44:36
+45        android:name="android.hardware.wifi"
+45-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:43:9-45
+46        android:required="false" />
+46-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:44:9-33
+47
+48    <application
+48-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:16:5-84:19
+49        android:allowBackup="true"
+49-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:17:9-35
+50        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+50-->[androidx.core:core:1.12.0] /home/goerdy/.gradle/caches/8.12/transforms/85cceb1472d53ab6aefef8c6f06b731d/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+51        android:extractNativeLibs="false"
+52        android:icon="@mipmap/ic_launcher"
+52-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:18:9-43
+53        android:label="@string/app_name"
+53-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:19:9-41
+54        android:supportsRtl="true"
+54-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:20:9-35
+55        android:theme="@style/AppTheme" >
+55-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:21:9-40
+56        <activity
+56-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:23:9-37:20
+57            android:name="de.cbrntrainer.MainActivity"
+57-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:24:13-41
+58            android:exported="true"
+58-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:25:13-36
+59            android:screenOrientation="portrait" >
+59-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:26:13-49
+60            <intent-filter>
+60-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:27:13-30:29
+61                <action android:name="android.intent.action.MAIN" />
+61-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:28:17-69
+61-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:28:25-66
+62
+63                <category android:name="android.intent.category.LAUNCHER" />
+63-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:29:17-77
+63-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:29:27-74
+64            </intent-filter>
+65            <intent-filter>
+65-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:31:13-36:29
+66                <action android:name="android.intent.action.VIEW" />
+66-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:32:17-69
+66-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:32:25-66
+67
+68                <category android:name="android.intent.category.DEFAULT" />
+68-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:33:17-76
+68-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:33:27-73
+69                <category android:name="android.intent.category.BROWSABLE" />
+69-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:34:17-78
+69-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:34:27-75
+70
+71                <data android:scheme="cbrn-trainer" />
+71-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:35:17-55
+71-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:35:23-52
+72            </intent-filter>
+73        </activity>
+74        <activity
+74-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:39:9-41:45
+75            android:name="de.cbrntrainer.SignalStrengthActivity"
+75-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:39:19-57
+76            android:exported="false"
+76-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:41:19-43
+77            android:screenOrientation="portrait" />
+77-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:40:19-55
+78        <activity
+78-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:43:9-45:46
+79            android:name="de.cbrntrainer.InstructionsActivity"
+79-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:43:19-55
+80            android:exported="false"
+80-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:45:19-43
+81            android:screenOrientation="portrait" />
+81-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:44:19-55
+82        <activity
+82-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:47:9-49:46
+83            android:name="de.cbrntrainer.SessionInputActivity"
+83-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:47:19-55
+84            android:exported="false"
+84-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:49:19-43
+85            android:screenOrientation="portrait" />
+85-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:48:19-55
+86        <activity
+86-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:50:9-52:46
+87            android:name="de.cbrntrainer.WebViewActivity"
+87-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:50:19-50
+88            android:exported="false"
+88-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:52:19-43
+89            android:screenOrientation="portrait" />
+89-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:51:19-55
+90        <activity
+90-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:53:9-55:46
+91            android:name="de.cbrntrainer.QrScannerActivity"
+91-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:53:19-52
+92            android:exported="false"
+92-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:55:19-43
+93            android:screenOrientation="portrait" />
+93-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:54:19-55
+94        <activity
+94-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:56:9-61:45
+95            android:name="de.cbrntrainer.PortraitCaptureActivity"
+95-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:56:19-58
+96            android:exported="false"
+96-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:61:19-43
+97            android:screenOrientation="portrait"
+97-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:57:19-55
+98            android:stateNotNeeded="true"
+98-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:58:19-48
+99            android:theme="@style/zxing_CaptureTheme"
+99-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:59:19-60
+100            android:windowSoftInputMode="stateAlwaysHidden" />
+100-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:60:19-66
+101        <activity
+101-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:62:9-64:46
+102            android:name="de.cbrntrainer.SettingsActivity"
+102-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:62:19-51
+103            android:exported="false"
+103-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:64:19-43
+104            android:screenOrientation="portrait" />
+104-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:63:19-55
+105        <activity
+105-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:65:9-67:46
+106            android:name="de.cbrntrainer.BluetoothSettingsActivity"
+106-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:65:19-60
+107            android:exported="false"
+107-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:67:19-43
+108            android:screenOrientation="portrait" />
+108-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:66:19-55
+109        <activity
+109-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:68:9-70:46
+110            android:name="de.cbrntrainer.BluetoothModeActivity"
+110-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:68:19-56
+111            android:exported="false"
+111-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:70:19-43
+112            android:screenOrientation="portrait" />
+112-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:69:19-55
+113        <activity
+113-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:71:9-73:46
+114            android:name="de.cbrntrainer.CalibrationActivity"
+114-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:71:19-54
+115            android:exported="false"
+115-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:73:19-43
+116            android:screenOrientation="portrait" />
+116-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:72:19-55
+117        <activity
+117-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:74:9-76:46
+118            android:name="de.cbrntrainer.MagnetModeActivity"
+118-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:74:19-53
+119            android:exported="false"
+119-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:76:19-43
+120            android:screenOrientation="portrait" />
+120-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:75:19-55
+121        <activity
+121-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:77:9-79:46
+122            android:name="de.cbrntrainer.BeaconSettingsActivity"
+122-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:77:19-57
+123            android:exported="false"
+123-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:79:19-43
+124            android:screenOrientation="portrait" />
+124-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:78:19-55
+125        <activity
+125-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:80:9-82:46
+126            android:name="de.cbrntrainer.DosisleistungsmessActivity"
+126-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:80:19-61
+127            android:exported="false"
+127-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:82:19-43
+128            android:screenOrientation="portrait" />
+128-->/home/goerdy/StudioProjects/CBRN-TRAINER-ANDROID/app/src/main/AndroidManifest.xml:81:19-55
+129
+130        <provider
+130-->[androidx.emoji2:emoji2:1.2.0] /home/goerdy/.gradle/caches/8.12/transforms/7d4bf440cd2c5df1ebc5cf62c1b011c1/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+131            android:name="androidx.startup.InitializationProvider"
+131-->[androidx.emoji2:emoji2:1.2.0] /home/goerdy/.gradle/caches/8.12/transforms/7d4bf440cd2c5df1ebc5cf62c1b011c1/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+132            android:authorities="de.cbrntrainer.androidx-startup"
+132-->[androidx.emoji2:emoji2:1.2.0] /home/goerdy/.gradle/caches/8.12/transforms/7d4bf440cd2c5df1ebc5cf62c1b011c1/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+133            android:exported="false" >
+133-->[androidx.emoji2:emoji2:1.2.0] /home/goerdy/.gradle/caches/8.12/transforms/7d4bf440cd2c5df1ebc5cf62c1b011c1/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+134            <meta-data
+134-->[androidx.emoji2:emoji2:1.2.0] /home/goerdy/.gradle/caches/8.12/transforms/7d4bf440cd2c5df1ebc5cf62c1b011c1/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+135                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+135-->[androidx.emoji2:emoji2:1.2.0] /home/goerdy/.gradle/caches/8.12/transforms/7d4bf440cd2c5df1ebc5cf62c1b011c1/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+136                android:value="androidx.startup" />
+136-->[androidx.emoji2:emoji2:1.2.0] /home/goerdy/.gradle/caches/8.12/transforms/7d4bf440cd2c5df1ebc5cf62c1b011c1/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+137            <meta-data
+137-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/goerdy/.gradle/caches/8.12/transforms/73d75a2e2d1b86b995e6f06e51a15008/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
+138                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+138-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/goerdy/.gradle/caches/8.12/transforms/73d75a2e2d1b86b995e6f06e51a15008/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
+139                android:value="androidx.startup" />
+139-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/goerdy/.gradle/caches/8.12/transforms/73d75a2e2d1b86b995e6f06e51a15008/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
+140            <meta-data
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+141                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+141-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+142                android:value="androidx.startup" />
+142-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+143        </provider>
+144
+145        <activity
+145-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:47:9-53:63
+146            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+146-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:48:13-74
+147            android:clearTaskOnLaunch="true"
+147-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:49:13-45
+148            android:screenOrientation="sensorLandscape"
+148-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:50:13-56
+149            android:stateNotNeeded="true"
+149-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:51:13-42
+150            android:theme="@style/zxing_CaptureTheme"
+150-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:52:13-54
+151            android:windowSoftInputMode="stateAlwaysHidden" />
+151-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/goerdy/.gradle/caches/8.12/transforms/626726b49092aa8a92bac624f9a1bfeb/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:53:13-60
+152
+153        <receiver
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+154            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+154-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+155            android:directBootAware="false"
+155-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+156            android:enabled="true"
+156-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+157            android:exported="true"
+157-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+158            android:permission="android.permission.DUMP" >
+158-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+159            <intent-filter>
+159-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+160                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+160-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+160-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+161            </intent-filter>
+162            <intent-filter>
+162-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+163                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+163-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+163-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+164            </intent-filter>
+165            <intent-filter>
+165-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+166                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+166-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+166-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+167            </intent-filter>
+168            <intent-filter>
+168-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+169                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+169-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+169-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/goerdy/.gradle/caches/8.12/transforms/e84c519178648b51968dc94416099343/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+170            </intent-filter>
+171        </receiver>
+172    </application>
+173
+174</manifest>

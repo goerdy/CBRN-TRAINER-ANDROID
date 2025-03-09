@@ -67,6 +67,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+                                                <entry key="color" value="000000" />
                                                 <entry key="imagePath" value="/tmp/ic_android_black_24dp.xml" />
                                               </map>
                                             </option>

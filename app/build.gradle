@@ -3,12 +3,19 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+// Lade Keystore-Eigenschaften aus externer Datei
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
-    namespace 'com.example.myapp'
+    namespace 'de.cbrntrainer'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.myapp"
+        applicationId "de.cbrntrainer"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -17,18 +24,26 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("release-key.jks")
-            storePassword "IhrPassword"
-            keyAlias "key0"
-            keyPassword "IhrKeyPassword"
+            if (keystorePropertiesFile.exists()) {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            } else {
+                // Fallback für CI/CD oder wenn keine Keystore-Datei vorhanden ist
+                storeFile file("pfad/zu/deinem/keystore.jks")
+                storePassword "dein-keystore-passwort"
+                keyAlias "dein-key-alias"
+                keyPassword "dein-key-passwort"
+            }
         }
     }
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
     compileOptions {

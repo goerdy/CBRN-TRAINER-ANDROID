@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="beacon_types">
+        <item>radiation</item>
+        
+    </string-array>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <string name="app_name">CBRN Trainer</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorPrimaryDark">#303F9F</item>
+        <item name="colorAccent">#FF4081</item>
+    </style>
+</resources>

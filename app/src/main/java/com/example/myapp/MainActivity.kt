@@ -1,4 +1,4 @@
-package com.example.myapp
+package de.cbrntrainer
 
 import android.content.Intent
 import android.os.Bundle
