@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="beacon_types">
-        <item>radiation</item>
-        <!-- Hier können weitere Typen hinzugefügt werden -->
+        <item>Strahler</item>
+        <!-- weitere Typen hier -->
     </string-array>
 </resources> 

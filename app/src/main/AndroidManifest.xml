@@ -17,6 +17,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -80,6 +81,28 @@
         <activity android:name=".DosisleistungsmessActivity"
                   android:screenOrientation="portrait"
                   android:exported="false" />
+        <activity
+            android:name=".CloudSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CloudModeLauncherActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".TestDeviceActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CoWarnerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CloudDosisleistungsmessActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MultiGasActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
 
     </application>
 </manifest> 

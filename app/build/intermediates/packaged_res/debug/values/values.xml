@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="beacon_types">
+        <item>Strahler</item>
+        
+    </string-array>
+    <color name="danger">#F44336</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="main_background">#F4AF0C</color>
+    <color name="safe">#4CAF50</color>
+    <color name="warning">#FFC107</color>
+    <string name="app_name">CBRN-TRAINER</string>
+    <string name="main_title">CBRN-TRAINER</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorPrimaryDark">#303F9F</item>
+        <item name="colorAccent">#FF4081</item>
+        <item name="android:windowBackground">@color/main_background</item>
+    </style>
+</resources>

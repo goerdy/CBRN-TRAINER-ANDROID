@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+        }
+        canvas {
+            width: 400px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mwCanvas" width="400" height="800"></canvas>
+    <script>
+        const canvas = document.getElementById('mwCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function drawDevice(values) {
+            // Canvas löschen
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Grundform des Geräts (schwarz mit silbernen Akzenten)
+            ctx.fillStyle = '#000000';
+            roundRect(ctx, 40, 40, 320, 640, 30, true);
+
+            // Silberne Seitenstreifen
+            ctx.fillStyle = '#C0C0C0';
+            roundRect(ctx, 40, 100, 20, 500, 0, true);
+            roundRect(ctx, 340, 100, 20, 500, 0, true);
+
+            // LCD Display (blau hinterleuchtet)
+            ctx.fillStyle = '#1E90FF';
+            roundRect(ctx, 80, 120, 240, 360, 10, true);
+
+            // Messwerte anzeigen
+            const measurements = [
+                { label: 'iBut', value: values.ibut, unit: 'PPM', format: v => parseInt(v) },
+                { label: 'Nona', value: values.nona, unit: '%UEG', format: v => (v * 100).toFixed(1) },
+                { label: 'O₂', value: values.o2, unit: 'VOL%', format: v => parseFloat(v).toFixed(1) },
+                { label: 'H₂S', value: values.h2s, unit: 'PPM', format: v => parseInt(v) },
+                { label: 'CO', value: values.co, unit: 'PPM', format: v => parseInt(v) },
+                { label: 'NH₃', value: values.nh3, unit: 'PPM', format: v => parseInt(v) }
+            ];
+
+            ctx.font = '28px monospace';
+            measurements.forEach((m, i) => {
+                const y = 180 + i * 50;
+                
+                // Horizontale Trennlinie
+                if (i > 0) {
+                    ctx.strokeStyle = '#FFFFFF';
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(90, y - 24);
+                    ctx.lineTo(310, y - 24);
+                    ctx.stroke();
+                }
+                
+                // Werte in weiß
+                ctx.fillStyle = '#FFFFFF';
+                ctx.textAlign = 'left';
+                ctx.fillText(m.label, 100, y);
+                
+                ctx.textAlign = 'right';
+                const displayValue = m.format(m.value);
+                ctx.fillText(`${displayValue} ${m.unit}`, 300, y);
+
+                // Farbige Statusanzeige
+                let statusColor;
+                if (m.label === 'O₂') {
+                    const o2Value = parseFloat(m.value);
+                    if (o2Value < 17 || o2Value > 23) {
+                        statusColor = '#FF0000';
+                    } else if (o2Value < 19.5 || o2Value > 21.5) {
+                        statusColor = '#FFFF00';
+                    } else {
+                        statusColor = '#00FF00';
+                    }
+                } else {
+                    statusColor = '#00FF00';
+                }
+                ctx.fillStyle = statusColor;
+                drawCircle(ctx, 90, y - 8, 4);
+            });
+
+            // Bedientasten
+            const buttons = [
+                { x: 120, y: 520, color: '#0066CC', label: '▼' },
+                { x: 200, y: 520, color: '#00CC00', label: 'OK' },
+                { x: 280, y: 520, color: '#0066CC', label: '▲' }
+            ];
+
+            buttons.forEach(btn => {
+                ctx.fillStyle = btn.color;
+                ctx.beginPath();
+                ctx.arc(btn.x, btn.y, 30, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = '32px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(btn.label, btn.x, btn.y + 12);
+            });
+
+            // Logo
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 28px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('CBRN-TRAINER', 200, 600);
+            ctx.font = '24px Arial';
+            ctx.fillText('X-AM 8000', 200, 630);
+        }
+
+        function roundRect(ctx, x, y, width, height, radius, fill) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            if (fill) {
+                ctx.fill();
+            } else {
+                ctx.stroke();
+            }
+        }
+
+        function drawCircle(ctx, x, y, radius) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Funktion, die von Android aufgerufen wird
+        function updateValues(data) {
+            drawDevice(data);
+            return "OK";
+        }
+
+        // Initial leere Werte anzeigen
+        updateValues({
+            ibut: 0,
+            nona: 0,
+            o2: 21,
+            h2s: 0,
+            co: 0,
+            nh3: 0
+        });
+    </script>
+</body>
+</html> 

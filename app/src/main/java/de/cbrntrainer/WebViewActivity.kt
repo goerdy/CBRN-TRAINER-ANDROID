@@ -19,7 +19,7 @@ class WebViewActivity : AppCompatActivity() {
         webView.webViewClient = WebViewClient()
         
         // Lade die URL mit der Session-ID
-        val url = "https://pq5.de/CBRN-TRAINER/TRAINEE-APP.php?sessionID=$sessionId"
+        val url = "https://cbrn-trainer.de/c/TRAINEE-APP.php?sessionID=$sessionId"
         webView.loadUrl(url)
     }
     

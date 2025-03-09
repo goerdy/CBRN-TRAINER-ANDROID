@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -17,8 +18,9 @@ class SavedBeaconAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val deviceName: TextView = view.findViewById(R.id.deviceName)
         val deviceAddress: TextView = view.findViewById(R.id.deviceAddress)
-        val settingsButton: Button = view.findViewById(R.id.settingsButton)
-        val removeButton: Button = view.findViewById(R.id.removeButton)
+        val rssiValue: TextView = view.findViewById(R.id.rssiValue)
+        val settingsButton: ImageButton = view.findViewById(R.id.settingsButton)
+        val deleteButton: ImageButton = view.findViewById(R.id.deleteButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,18 +33,11 @@ class SavedBeaconAdapter(
         val beacon = beacons[position]
         holder.deviceName.text = beacon.name ?: "Unbekanntes Gerät"
         holder.deviceAddress.text = beacon.address
+        holder.rssiValue.text = "RSSI: ${beacon.rssi} dBm"
         
-        holder.itemView.setOnClickListener {
-            onItemClick(beacon)
-        }
-        
-        holder.removeButton.setOnClickListener {
-            onRemoveClick(beacon)
-        }
-        
-        holder.settingsButton.setOnClickListener {
-            onSettingsClick(beacon)
-        }
+        holder.itemView.setOnClickListener { onItemClick(beacon) }
+        holder.settingsButton.setOnClickListener { onSettingsClick(beacon) }
+        holder.deleteButton.setOnClickListener { onRemoveClick(beacon) }
     }
 
     override fun getItemCount() = beacons.size

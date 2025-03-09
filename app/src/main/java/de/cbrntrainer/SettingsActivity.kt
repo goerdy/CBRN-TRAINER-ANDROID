@@ -20,5 +20,10 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.backButton).setOnClickListener {
             finish()
         }
+
+        // Cloud-Einstellungen Button
+        findViewById<Button>(R.id.cloudSettingsButton).setOnClickListener {
+            startActivity(Intent(this, CloudSettingsActivity::class.java))
+        }
     }
 } 

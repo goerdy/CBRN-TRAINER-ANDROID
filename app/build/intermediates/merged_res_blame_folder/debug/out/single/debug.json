@@ -1,0 +1,182 @@
+[
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_magnet.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_magnet.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_cloud_mode_launcher.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_cloud_mode_launcher.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_beacon_item.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/beacon_item.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_magnet_new.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_magnet_new.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_signal_strength.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_signal_strength.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_web_view.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_web_view.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_cloud_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_cloud_settings.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_delete.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_delete.xml"
+    },
+    {
+        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_multigas.xml.flat",
+        "source": "de.cbrntrainer.app-main-34:/layout/activity_multigas.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_main.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_calibration.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_calibration.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_bluetooth_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_bluetooth_settings.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_bluetooth.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_bluetooth.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_co_warner.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_co_warner.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_exit.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_exit.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_bluetooth_mode.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_bluetooth_mode.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/raw_geiger_click.wav.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/raw/geiger_click.wav"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_cloud.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_cloud.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_item_beacon.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/item_beacon.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_item_saved_beacon.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/item_saved_beacon.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_qr_code.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_qr_code.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_dosisleistungsmess.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_dosisleistungsmess.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_item_saved_beacon_simple.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/item_saved_beacon_simple.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_session_input.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_session_input.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_cbrn_trainer_logo.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/cbrn_trainer_logo.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_info.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/drawable/ic_info.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_cloud_dosisleistungsmess.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_cloud_dosisleistungsmess.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_beacon_settings.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_beacon_settings.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_instructions.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_instructions.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_magnet_mode.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_magnet_mode.xml"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_test_device.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-34:/layout/activity_test_device.xml"
+    }
+]

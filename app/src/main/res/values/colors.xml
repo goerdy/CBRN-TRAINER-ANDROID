@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="main_background">#F4AF0C</color>
+    <color name="safe">#4CAF50</color>     <!-- Grün -->
+    <color name="warning">#FFC107</color>   <!-- Gelb -->
+    <color name="danger">#F44336</color>    <!-- Rot -->
 </resources> 

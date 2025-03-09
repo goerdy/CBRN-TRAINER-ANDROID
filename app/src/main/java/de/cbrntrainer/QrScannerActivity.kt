@@ -48,16 +48,23 @@ class QrScannerActivity : AppCompatActivity() {
     }
     
     private fun processQrContent(content: String) {
+        // Hole die Server-URL aus den SharedPreferences
+        val sharedPreferences = getSharedPreferences(CloudSettingsActivity.PREFS_NAME, MODE_PRIVATE)
+        val serverUrl = sharedPreferences.getString(CloudSettingsActivity.URL_KEY, CloudSettingsActivity.DEFAULT_URL)
+
         when {
             // Fall 1: Web-Link mit TRAINEE.php
-            content.startsWith("https://pq5.de/CBRN-TRAINER/TRAINEE.php") -> {
+            content.startsWith("$serverUrl/TRAINEE.php") -> {
                 // Extrahiere die Session-ID aus dem Link
                 val sessionId = extractSessionId(content)
                 if (sessionId != null) {
-                    // Starte WebView mit der Session-ID
-                    val intent = Intent(this, WebViewActivity::class.java)
-                    intent.putExtra("SESSION_ID", sessionId)
-                    startActivity(intent)
+                    // Speichere die Session-ID mit eigenem Key
+                    sharedPreferences.edit()
+                        .putString("last_session_id", sessionId)
+                        .apply()
+
+                    // Starte CloudModeLauncherActivity
+                    startActivity(Intent(this, CloudModeLauncherActivity::class.java))
                     finish()
                 } else {
                     showInvalidQrCodeMessage()

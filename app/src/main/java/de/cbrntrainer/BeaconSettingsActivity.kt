@@ -62,6 +62,18 @@ class BeaconSettingsActivity : BaseActivity() {
         }
     }
     
+    override fun onResume() {
+        super.onResume()
+        updateCalibrationStatus()
+        loadBeaconData()
+    }
+    
+    private fun updateCalibrationStatus() {
+        val sharedPreferences = getSharedPreferences("BeaconPrefs", Context.MODE_PRIVATE)
+        val calibratedRssi = sharedPreferences.getInt("calibrated_rssi", -59)
+        calibrationStatusText.text = "Kalibrierter RSSI-Wert: $calibratedRssi dBm"
+    }
+    
     private fun loadBeaconData() {
         beaconInfoText.text = "Beacon: ${beaconName ?: "Unbekannt"}\nAdresse: $beaconAddress"
         
@@ -86,10 +98,6 @@ class BeaconSettingsActivity : BaseActivity() {
                 rateInput.setText(beacon.rate)
             }
         }
-        
-        // Zeige Kalibrierungsstatus
-        val calibratedRssi = sharedPreferences.getInt("calibrated_rssi", -59)
-        calibrationStatusText.text = "Kalibrierter RSSI-Wert: $calibratedRssi dBm"
     }
     
     private fun saveBeaconSettings() {

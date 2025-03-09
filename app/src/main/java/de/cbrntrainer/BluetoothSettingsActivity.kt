@@ -232,7 +232,10 @@ class BluetoothSettingsActivity : BaseActivity() {
     private fun addBeaconToSaved(beacon: BeaconData) {
         // Prüfen, ob das Beacon bereits gespeichert ist
         if (savedBeacons.none { it.address == beacon.address }) {
-            val savedBeacon = beacon.copy(isSaved = true)
+            val savedBeacon = beacon.copy(
+                isSaved = true,
+                rate = "5"  // Setze Standardwert auf 5
+            )
             savedBeacons.add(savedBeacon)
             savedBeaconAdapter.notifyItemInserted(savedBeacons.size - 1)
             saveBeacons()
