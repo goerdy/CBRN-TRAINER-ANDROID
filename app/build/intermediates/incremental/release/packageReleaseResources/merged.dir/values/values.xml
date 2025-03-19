@@ -8,10 +8,14 @@
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="main_background">#F4AF0C</color>
     <color name="safe">#4CAF50</color>
+    <color name="scanner_mask">#80000000</color>
     <color name="warning">#FFC107</color>
+    <color name="zxing_custom_possible_result_points">#c0ffff00</color>
+    <color name="zxing_custom_result_view">#b0000000</color>
+    <color name="zxing_custom_viewfinder_laser">#ffcc0000</color>
     <string name="app_name">CBRN-TRAINER</string>
     <string name="main_title">CBRN-TRAINER</string>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorPrimary">#3F51B5</item>

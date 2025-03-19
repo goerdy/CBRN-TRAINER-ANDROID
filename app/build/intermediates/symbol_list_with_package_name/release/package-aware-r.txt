@@ -2094,6 +2094,7 @@ color primary_text_disabled_material_light
 color ripple_material_dark
 color ripple_material_light
 color safe
+color scanner_mask
 color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
@@ -3201,6 +3202,7 @@ id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
 id backButton
+id barcode_scanner
 id barrier
 id baseline
 id beaconInfoText
@@ -3220,7 +3222,6 @@ id bruttoNettoButton
 id buttonPanel
 id cache_measures
 id calibrateButton
-id calibrationStatusText
 id calibrationTitle
 id callMeasure
 id cancel_button
@@ -3554,6 +3555,7 @@ id sawtooth
 id scale
 id scanButton
 id scanQrButton
+id scannerTitle
 id screen
 id scroll
 id scrollIndicatorDown
@@ -3573,6 +3575,7 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
+id serverUrlInput
 id sessionDescription
 id sessionIdInput
 id sessionTitle
@@ -3671,7 +3674,6 @@ id unchecked
 id uniform
 id unlabeled
 id up
-id urlInput
 id useLogo
 id vertical_only
 id view_offset_helper
@@ -3833,6 +3835,7 @@ layout activity_instructions
 layout activity_magnet_mode
 layout activity_main
 layout activity_multigas
+layout activity_qr_scanner
 layout activity_session_input
 layout activity_settings
 layout activity_signal_strength
@@ -3840,6 +3843,7 @@ layout activity_test_device
 layout activity_web_view
 layout beacon_item
 layout custom_dialog
+layout custom_scanner
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
 layout design_layout_snackbar

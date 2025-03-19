@@ -27,10 +27,12 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/urlInput"
+            android:id="@+id/serverUrlInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"/>
+            android:hint="https://cbrn-trainer.de/c"
+            android:inputType="textUri"
+            android:layout_marginBottom="16dp"/>
 
         <!-- CO -->
         <TextView
@@ -345,12 +347,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Speichern"/>
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Zurück"/>
 
     </LinearLayout>
 </ScrollView> 
