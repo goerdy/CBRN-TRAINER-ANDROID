@@ -41,10 +41,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/deviceSelectionLabel">
+        app:layout_constraintTop_toBottomOf="@id/deviceSelectionLabel"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
             android:id="@+id/testDeviceButton"
@@ -57,7 +58,7 @@
             android:id="@+id/coWarnerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CO-WARNER"
+            android:text="CO-WARNGERÄT"
             android:layout_marginBottom="8dp"/>
 
         <Button
@@ -89,13 +90,5 @@
             android:layout_marginBottom="8dp"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Zurück"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout> 

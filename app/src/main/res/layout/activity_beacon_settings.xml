@@ -11,61 +11,44 @@
         android:id="@+id/settingsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Beacon Einstellungen"
+        android:text="Beacon-Einstellungen"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/beaconInfoText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:text="Beacon-Adresse: AA:BB:CC:DD:EE:FF"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/settingsTitle"/>
-
-    <TextView
-        android:id="@+id/calibrationStatusText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/beaconInfoText"/>
-
-    <Button
-        android:id="@+id/calibrateButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Signalstärke kalibrieren"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/calibrationStatusText"/>
 
     <TextView
         android:id="@+id/typeLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Typ:"
+        android:text="Gerätetyp:"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/calibrateButton"/>
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/beaconInfoText"/>
 
     <Spinner
         android:id="@+id/typeSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
         app:layout_constraintTop_toBottomOf="@id/typeLabel"/>
 
     <TextView
         android:id="@+id/rateLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dosisleistung in 10cm Entfernung (mSv/h):"
+        android:text="Messrate (µSv/h):"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/typeSpinner"/>
 
     <EditText
@@ -73,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
+        android:hint="5.0"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/rateLabel"/>
 
@@ -83,13 +67,5 @@
         android:text="Speichern"
         android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/rateInput"/>
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Zurück"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout> 

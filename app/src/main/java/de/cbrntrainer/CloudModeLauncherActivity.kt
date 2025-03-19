@@ -2,12 +2,14 @@ package de.cbrntrainer
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import android.content.SharedPreferences
 
 class CloudModeLauncherActivity : BaseActivity() {
+    private val TAG = "CloudModeLauncherActivity"
     
     private lateinit var sessionIdInput: EditText
     private lateinit var sharedPreferences: SharedPreferences
@@ -20,55 +22,64 @@ class CloudModeLauncherActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cloud_mode_launcher)
         
+        // Session-ID aus Intent holen
+        val sessionId = intent.getStringExtra("SESSION_ID")
+        Log.d(TAG, "Received session ID: $sessionId")
+        
+        // Session-ID in das Eingabefeld eintragen, wenn vorhanden
         sessionIdInput = findViewById(R.id.sessionIdInput)
-        sharedPreferences = getSharedPreferences(CloudSettingsActivity.PREFS_NAME, MODE_PRIVATE)
-        
-        // Letzte Session ID laden
-        val lastSessionId = sharedPreferences.getString(LAST_SESSION_ID, "")
-        sessionIdInput.setText(lastSessionId)
-        
-        // Messgerät Button (vorher Test-Messgerät)
-        findViewById<Button>(R.id.testDeviceButton).setOnClickListener {
-            handleDeviceButton(TestDeviceActivity::class.java)
+        if (!sessionId.isNullOrEmpty()) {
+            sessionIdInput.setText(sessionId)
+        } else {
+            // Versuche, die letzte Session-ID aus den SharedPreferences zu laden
+            val sharedPreferences = getSharedPreferences(CloudSettingsActivity.PREFS_NAME, MODE_PRIVATE)
+            val lastSessionId = sharedPreferences.getString("last_session_id", "")
+            if (!lastSessionId.isNullOrEmpty()) {
+                sessionIdInput.setText(lastSessionId)
+            }
         }
         
-        // CO-Warner Button
-        findViewById<Button>(R.id.coWarnerButton).setOnClickListener {
-            handleDeviceButton(CoWarnerActivity::class.java)
-        }
-        
-        // Dosisleistungsmess Button
-        findViewById<Button>(R.id.radiationMeterButton).setOnClickListener {
-            handleDeviceButton(CloudDosisleistungsmessActivity::class.java)
-        }
-        
-        // Multi-Gas Button
-        findViewById<Button>(R.id.multiGasButton).setOnClickListener {
-            handleDeviceButton(MultiGasActivity::class.java)
-        }
-        
-        // Zurück Button
-        findViewById<Button>(R.id.backButton).setOnClickListener {
-            finish()
-        }
-        
-        // Die anderen Geräte-Buttons werden später implementiert
+        // Geräte-Buttons einrichten
+        setupDeviceButtons()
     }
     
-    private fun handleDeviceButton(activityClass: Class<*>) {
-        val sessionId = sessionIdInput.text.toString()
-        if (sessionId.length == 4) {
-            // Session ID speichern
-            sharedPreferences.edit()
-                .putString(LAST_SESSION_ID, sessionId)
-                .apply()
-            
-            // Activity starten
-            val intent = Intent(this, activityClass)
-            intent.putExtra("SESSION_ID", sessionId)
-            startActivity(intent)
-        } else {
-            Toast.makeText(this, "Bitte geben Sie eine 4-stellige Session ID ein", Toast.LENGTH_SHORT).show()
+    private fun setupDeviceButtons() {
+        // Test-Messgerät
+        findViewById<Button>(R.id.testDeviceButton).setOnClickListener {
+            launchDeviceActivity(TestDeviceActivity::class.java, sessionIdInput.text.toString())
         }
+        
+        // CO-Warner
+        findViewById<Button>(R.id.coWarnerButton).setOnClickListener {
+            launchDeviceActivity(CoWarnerActivity::class.java, sessionIdInput.text.toString())
+        }
+        
+        // Multi-Gaswarngerät
+        findViewById<Button>(R.id.multiGasButton).setOnClickListener {
+            launchDeviceActivity(MultiGasActivity::class.java, sessionIdInput.text.toString())
+        }
+        
+        // Dosisleistungsmessgerät
+        findViewById<Button>(R.id.radiationMeterButton).setOnClickListener {
+            launchDeviceActivity(CloudDosisleistungsmessActivity::class.java, sessionIdInput.text.toString())
+        }
+        
+        // Weitere Buttons...
+    }
+    
+    private fun launchDeviceActivity(activityClass: Class<*>, sessionId: String) {
+        if (sessionId.isEmpty() || !sessionId.matches(Regex("[A-Za-z0-9]{4}"))) {
+            Toast.makeText(this, "Bitte geben Sie eine gültige Session-ID ein (4 Zeichen)", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        // Session-ID speichern
+        val sharedPreferences = getSharedPreferences(CloudSettingsActivity.PREFS_NAME, MODE_PRIVATE)
+        sharedPreferences.edit().putString("last_session_id", sessionId).apply()
+        
+        // Activity starten
+        val intent = Intent(this, activityClass)
+        intent.putExtra("SESSION_ID", sessionId)
+        startActivity(intent)
     }
 } 

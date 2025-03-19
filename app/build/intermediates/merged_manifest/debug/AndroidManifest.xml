@@ -92,7 +92,8 @@
         <activity
             android:name="de.cbrntrainer.QrScannerActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name="de.cbrntrainer.PortraitCaptureActivity"
             android:exported="false"

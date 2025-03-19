@@ -10,7 +10,7 @@ import android.content.SharedPreferences
 
 class CloudSettingsActivity : BaseActivity() {
     
-    private lateinit var urlInput: EditText
+    private lateinit var serverUrlInput: EditText
     private lateinit var sharedPreferences: SharedPreferences
     
     // Gas-Schwellenwerte Konstanten
@@ -65,17 +65,32 @@ class CloudSettingsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cloud_settings)
         
-        urlInput = findViewById(R.id.urlInput)
+        serverUrlInput = findViewById(R.id.serverUrlInput)
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         
-        setupUrlInput()
-        setupGasThresholds()
-        setupButtons()
-    }
-    
-    private fun setupUrlInput() {
+        // Lade gespeicherte URL
         val savedUrl = sharedPreferences.getString(URL_KEY, DEFAULT_URL)
-        urlInput.setText(savedUrl)
+        serverUrlInput.setText(savedUrl)
+        
+        // Speichern-Button
+        findViewById<Button>(R.id.saveButton).setOnClickListener {
+            val url = serverUrlInput.text.toString().trim()
+            
+            if (url.isEmpty()) {
+                Toast.makeText(this, "Bitte geben Sie eine URL ein", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            
+            // URL speichern
+            sharedPreferences.edit()
+                .putString(URL_KEY, url)
+                .apply()
+            
+            Toast.makeText(this, "Einstellungen gespeichert", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        
+        setupGasThresholds()
     }
     
     private fun setupGasThresholds() {
@@ -120,63 +135,7 @@ class CloudSettingsActivity : BaseActivity() {
             getThreshold("dosisleistung_a2", DOSISLEISTUNG_A2_DEFAULT).toString())
     }
     
-    private fun setupButtons() {
-        findViewById<Button>(R.id.saveButton).setOnClickListener {
-            saveSettings()
-        }
-        
-        findViewById<Button>(R.id.backButton).setOnClickListener {
-            finish()
-        }
-    }
-    
-    private fun saveSettings() {
-        val editor = sharedPreferences.edit()
-        
-        try {
-            // URL speichern
-            editor.putString(URL_KEY, urlInput.text.toString())
-            
-            // Gas-Schwellenwerte speichern
-            saveThreshold(editor, "co_a1", R.id.coA1Input)
-            saveThreshold(editor, "co_a2", R.id.coA2Input)
-            saveThreshold(editor, "ch4_a1", R.id.ch4A1Input)
-            saveThreshold(editor, "ch4_a2", R.id.ch4A2Input)
-            saveThreshold(editor, "co2_a1", R.id.co2A1Input)
-            saveThreshold(editor, "co2_a2", R.id.co2A2Input)
-            saveThreshold(editor, "ibut_a1", R.id.ibutA1Input)
-            saveThreshold(editor, "ibut_a2", R.id.ibutA2Input)
-            saveThreshold(editor, "nona_a1", R.id.nonaA1Input)
-            saveThreshold(editor, "nona_a2", R.id.nonaA2Input)
-            saveThreshold(editor, "h2s_a1", R.id.h2sA1Input)
-            saveThreshold(editor, "h2s_a2", R.id.h2sA2Input)
-            saveThreshold(editor, "nh3_a1", R.id.nh3A1Input)
-            saveThreshold(editor, "nh3_a2", R.id.nh3A2Input)
-            saveThreshold(editor, "o2_a1_low", R.id.o2A1LowInput)
-            saveThreshold(editor, "o2_a1_high", R.id.o2A1HighInput)
-            saveThreshold(editor, "o2_a2_low", R.id.o2A2LowInput)
-            saveThreshold(editor, "o2_a2_high", R.id.o2A2HighInput)
-            
-            // Dosisleistung
-            saveThreshold(editor, "dosisleistung_a1", R.id.dosisleistungA1Input)
-            saveThreshold(editor, "dosisleistung_a2", R.id.dosisleistungA2Input)
-            
-            editor.apply()
-            Toast.makeText(this, "Einstellungen gespeichert", Toast.LENGTH_SHORT).show()
-            finish()
-        } catch (e: Exception) {
-            Toast.makeText(this, "Fehler beim Speichern: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
-    
     private fun getThreshold(key: String, defaultValue: Double): Double {
         return sharedPreferences.getFloat(key, defaultValue.toFloat()).toDouble()
-    }
-    
-    private fun saveThreshold(editor: SharedPreferences.Editor, key: String, editTextId: Int) {
-        val value = findViewById<EditText>(editTextId).text.toString().toDoubleOrNull()
-        if (value != null) {
-            editor.putFloat(key, value.toFloat())
-        }
     }
 } 

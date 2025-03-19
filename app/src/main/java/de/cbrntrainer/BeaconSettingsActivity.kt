@@ -1,130 +1,105 @@
 package de.cbrntrainer
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.widget.*
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 
 class BeaconSettingsActivity : BaseActivity() {
     
-    private lateinit var typeSpinner: Spinner
-    private lateinit var rateInput: EditText
-    private lateinit var beaconInfoText: TextView
-    private lateinit var calibrationStatusText: TextView
-    
-    private var beaconAddress: String? = null
-    private var beaconName: String? = null
-    private var currentBeacon: BeaconData? = null
+    private lateinit var beaconAddress: String
+    private lateinit var beaconName: String
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beacon_settings)
         
-        beaconAddress = intent.getStringExtra("BEACON_ADDRESS")
-        beaconName = intent.getStringExtra("BEACON_NAME")
+        // Beacon-Daten aus Intent holen
+        beaconAddress = intent.getStringExtra("BEACON_ADDRESS") ?: ""
+        beaconName = intent.getStringExtra("BEACON_NAME") ?: "Unbekanntes Gerät"
         
-        typeSpinner = findViewById(R.id.typeSpinner)
-        rateInput = findViewById(R.id.rateInput)
-        beaconInfoText = findViewById(R.id.beaconInfoText)
-        calibrationStatusText = findViewById(R.id.calibrationStatusText)
-        
-        // Spinner mit Typen füllen
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.beacon_types,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            typeSpinner.adapter = adapter
+        if (beaconAddress.isEmpty()) {
+            Toast.makeText(this, "Fehler: Keine Beacon-Adresse übergeben", Toast.LENGTH_SHORT).show()
+            finish()
+            return
         }
         
-        // Lade aktuelle Beacon-Daten
-        loadBeaconData()
+        // Beacon-Info anzeigen
+        val beaconInfoText = findViewById<TextView>(R.id.beaconInfoText)
+        beaconInfoText.text = "Beacon: $beaconName\nAdresse: $beaconAddress"
         
-        // Kalibrieren Button
-        findViewById<Button>(R.id.calibrateButton).setOnClickListener {
-            val intent = Intent(this, CalibrationActivity::class.java)
-            intent.putExtra("BEACON_ADDRESS", beaconAddress)
-            intent.putExtra("BEACON_NAME", beaconName)
-            startActivity(intent)
-        }
+        // Gerätetyp-Spinner einrichten
+        setupTypeSpinner()
         
-        // Speichern Button
+        // Messrate-Eingabefeld einrichten
+        setupRateInput()
+        
+        // Speichern-Button
         findViewById<Button>(R.id.saveButton).setOnClickListener {
             saveBeaconSettings()
         }
+    }
+    
+    private fun setupTypeSpinner() {
+        val spinner = findViewById<Spinner>(R.id.typeSpinner)
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.beacon_types,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
         
-        // Zurück Button
-        findViewById<Button>(R.id.backButton).setOnClickListener {
-            finish()
+        // Gespeicherten Typ laden
+        val sharedPreferences = getSharedPreferences("BeaconSettings", Context.MODE_PRIVATE)
+        val savedType = sharedPreferences.getString("${beaconAddress}_type", "Strahler")
+        val position = adapter.getPosition(savedType)
+        if (position >= 0) {
+            spinner.setSelection(position)
         }
     }
     
-    override fun onResume() {
-        super.onResume()
-        updateCalibrationStatus()
-        loadBeaconData()
-    }
-    
-    private fun updateCalibrationStatus() {
-        val sharedPreferences = getSharedPreferences("BeaconPrefs", Context.MODE_PRIVATE)
-        val calibratedRssi = sharedPreferences.getInt("calibrated_rssi", -59)
-        calibrationStatusText.text = "Kalibrierter RSSI-Wert: $calibratedRssi dBm"
-    }
-    
-    private fun loadBeaconData() {
-        beaconInfoText.text = "Beacon: ${beaconName ?: "Unbekannt"}\nAdresse: $beaconAddress"
+    private fun setupRateInput() {
+        val rateInput = findViewById<EditText>(R.id.rateInput)
         
-        val sharedPreferences = getSharedPreferences("BeaconPrefs", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPreferences.getString("saved_beacons", null)
-        
-        if (json != null) {
-            val type = object : TypeToken<List<BeaconData>>() {}.type
-            val beacons: List<BeaconData> = gson.fromJson(json, type)
-            currentBeacon = beacons.find { it.address == beaconAddress }
-            
-            currentBeacon?.let { beacon ->
-                // Setze Typ
-                val typeArray = resources.getStringArray(R.array.beacon_types)
-                val typePosition = typeArray.indexOf(beacon.type)
-                if (typePosition >= 0) {
-                    typeSpinner.setSelection(typePosition)
-                }
-                
-                // Setze Rate
-                rateInput.setText(beacon.rate)
-            }
-        }
+        // Gespeicherte Rate laden
+        val sharedPreferences = getSharedPreferences("BeaconSettings", Context.MODE_PRIVATE)
+        val savedRate = sharedPreferences.getString("${beaconAddress}_rate", "5.0")
+        rateInput.setText(savedRate)
     }
     
     private fun saveBeaconSettings() {
-        val sharedPreferences = getSharedPreferences("BeaconPrefs", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPreferences.getString("saved_beacons", null)
+        val typeSpinner = findViewById<Spinner>(R.id.typeSpinner)
+        val rateInput = findViewById<EditText>(R.id.rateInput)
         
-        if (json != null) {
-            val type = object : TypeToken<List<BeaconData>>() {}.type
-            val beacons = gson.fromJson<MutableList<BeaconData>>(json, type)
-            
-            val index = beacons.indexOfFirst { it.address == beaconAddress }
-            if (index >= 0) {
-                val updatedBeacon = beacons[index].copy(
-                    type = typeSpinner.selectedItem.toString(),
-                    rate = rateInput.text.toString()
-                )
-                beacons[index] = updatedBeacon
-                
-                // Speichere aktualisierte Liste
-                sharedPreferences.edit()
-                    .putString("saved_beacons", gson.toJson(beacons))
-                    .apply()
-                
-                Toast.makeText(this, "Einstellungen gespeichert", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        }
+        val type = typeSpinner.selectedItem.toString()
+        val rate = rateInput.text.toString()
+        
+        // Einstellungen speichern
+        val sharedPreferences = getSharedPreferences("BeaconSettings", Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .putString("${beaconAddress}_type", type)
+            .putString("${beaconAddress}_rate", rate)
+            .apply()
+        
+        // Beacon als gespeichert markieren
+        val savedBeacons = sharedPreferences.getStringSet("saved_beacons", mutableSetOf()) ?: mutableSetOf()
+        val updatedBeacons = savedBeacons.toMutableSet()
+        updatedBeacons.add(beaconAddress)
+        sharedPreferences.edit()
+            .putStringSet("saved_beacons", updatedBeacons)
+            .apply()
+        
+        // Beacon-Name speichern
+        sharedPreferences.edit()
+            .putString("${beaconAddress}_name", beaconName)
+            .apply()
+        
+        Toast.makeText(this, "Einstellungen gespeichert", Toast.LENGTH_SHORT).show()
+        finish()
     }
 } 

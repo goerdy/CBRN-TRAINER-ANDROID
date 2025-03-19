@@ -51,9 +51,11 @@
         <activity android:name=".WebViewActivity" 
                   android:screenOrientation="portrait"
                   android:exported="false" />
-        <activity android:name=".QrScannerActivity" 
-                  android:screenOrientation="portrait"
-                  android:exported="false" />
+        <activity
+            android:name=".QrScannerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:exported="false"/>
         <activity android:name=".PortraitCaptureActivity"
                   android:screenOrientation="portrait"
                   android:stateNotNeeded="true"

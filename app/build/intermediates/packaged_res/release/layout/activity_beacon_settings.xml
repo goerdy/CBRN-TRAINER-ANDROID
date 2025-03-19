@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/main_background">
+
+    <TextView
+        android:id="@+id/settingsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Beacon Einstellungen"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/beaconInfoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/settingsTitle"/>
+
+    <TextView
+        android:id="@+id/calibrationStatusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/beaconInfoText"/>
+
+    <Button
+        android:id="@+id/calibrateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Signalstärke kalibrieren"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/calibrationStatusText"/>
+
+    <TextView
+        android:id="@+id/typeLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Typ:"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/calibrateButton"/>
+
+    <Spinner
+        android:id="@+id/typeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/typeLabel"/>
+
+    <TextView
+        android:id="@+id/rateLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dosisleistung in 10cm Entfernung (mSv/h):"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/typeSpinner"/>
+
+    <EditText
+        android:id="@+id/rateInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/rateLabel"/>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Speichern"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/rateInput"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zurück"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

@@ -5,4 +5,10 @@
     <color name="safe">#4CAF50</color>     <!-- Grün -->
     <color name="warning">#FFC107</color>   <!-- Gelb -->
     <color name="danger">#F44336</color>    <!-- Rot -->
+    
+    <!-- Scanner-Farben -->
+    <color name="scanner_mask">#80000000</color>
+    <color name="zxing_custom_possible_result_points">#c0ffff00</color>
+    <color name="zxing_custom_result_view">#b0000000</color>
+    <color name="zxing_custom_viewfinder_laser">#ffcc0000</color>
 </resources> 

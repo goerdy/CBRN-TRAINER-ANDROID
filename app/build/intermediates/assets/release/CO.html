@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+        }
+        canvas {
+            width: 200px;
+            height: 275px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="coCanvas" width="200" height="275"></canvas>
+    <script>
+        const canvas = document.getElementById('coCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function drawDevice(value) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Grundform des Geräts (schwarz mit silbernem Clip)
+            ctx.fillStyle = '#333333';
+            roundRect(ctx, 20, 20, 160, 235, 15, true);
+
+            // Graue Display-Umrandung und Hintergrund der Buttons
+            ctx.fillStyle = '#CCCCCC';
+            roundRect(ctx, 30, 30, 140, 200, 15, true);
+
+            ctx.fillStyle = '#F5F5F5';
+            roundRect(ctx, 40, 125, 120, 75, 5, true);
+
+            // LCD Display (grünlich hinterleuchtet)
+            ctx.fillStyle = '#90EE90';
+            roundRect(ctx, 40, 50, 120, 80, 5, true);
+
+            // Batterie-Symbol
+            drawBatteryIcon(ctx, 135, 55);
+
+            // Messwert
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 36px monospace';
+            ctx.textAlign = 'right';
+            const displayValue = parseInt(value);
+            ctx.fillText(displayValue, 140, 100);
+            
+            // PPM Einheit
+            ctx.font = '14px Arial';
+            ctx.fillText('PPM', 140, 120);
+
+            // Buttons
+            const buttons = [
+                { x: 65, y: 155, label: '▼', color: '#0066CC' },
+                { x: 135, y: 155, label: 'OK', color: '#00CC00' }
+            ];
+
+            buttons.forEach(btn => {
+                ctx.fillStyle = btn.color;
+                ctx.beginPath();
+                ctx.arc(btn.x, btn.y, 20, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = '16px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(btn.label, btn.x, btn.y + 5);
+            });
+
+            // CBRN-TRAINER Logo
+            ctx.fillStyle = '#0066CC';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('CBRN-TRAINER', 100, 190);
+            ctx.fillStyle = '#000000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Pac 8500', 100, 220);
+
+            // Status LED
+            const numericValue = parseInt(value);
+            if (numericValue >= 60) {
+                ctx.fillStyle = '#FF0000';  // Rot für A2
+            } else if (numericValue >= 30) {
+                ctx.fillStyle = '#FFA500';  // Orange für A1
+            } else {
+                ctx.fillStyle = '#00FF00';  // Grün für normal
+            }
+            drawCircle(ctx, 45, 35, 8);
+        }
+
+        function drawBatteryIcon(ctx, x, y) {
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(x - 10, y, 15, 8);
+            ctx.fillRect(x + 5, y + 2, 2, 4);
+            
+            // Batterie-Füllstand (grün)
+            ctx.fillStyle = '#00FF00';
+            ctx.fillRect(x - 8, y + 2, 11, 4);
+        }
+
+        function drawCircle(ctx, x, y, radius) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function roundRect(ctx, x, y, width, height, radius, fill) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            if (fill) {
+                ctx.fill();
+            } else {
+                ctx.stroke();
+            }
+        }
+
+        // Funktion, die von Android aufgerufen wird
+        function updateValue(value) {
+            drawDevice(value);
+            return "OK";
+        }
+
+        // Initial zeichnen
+        drawDevice(0);
+
+        // Debug-Funktion
+        window.onerror = function(msg, url, line) {
+            console.log('JavaScript Fehler:', msg, 'in', url, 'Zeile:', line);
+            return false;
+        };
+    </script>
+</body>
+</html>
+
