@@ -29,6 +29,11 @@ class MainActivity : BaseActivity() {
             startActivity(Intent(this, DosisleistungsmessActivity::class.java))
         }
 
+        // Dosisleistungswarner Button
+        findViewById<Button>(R.id.dlWarnerButton).setOnClickListener {
+            startActivity(Intent(this, BluetoothDLWarnActivity::class.java))
+        }
+
         // Magnet-Modus Button
         findViewById<Button>(R.id.magnetButton).setOnClickListener {
             startActivity(Intent(this, MagnetModeActivity::class.java))

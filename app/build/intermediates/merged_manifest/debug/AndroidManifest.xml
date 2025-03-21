@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.cbrntrainer"
-    android:versionCode="2"
-    android:versionName="1.1" >
+    android:versionCode="4"
+    android:versionName="1.3" >
 
     <uses-sdk
         android:minSdkVersion="24"
@@ -150,6 +150,18 @@
         <activity
             android:name="de.cbrntrainer.MultiGasActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="de.cbrntrainer.DlWarnerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="de.cbrntrainer.BluetoothDLWarnActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="de.cbrntrainer.DosisWarngeraetActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <provider

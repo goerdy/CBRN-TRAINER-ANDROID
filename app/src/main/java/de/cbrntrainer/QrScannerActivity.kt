@@ -35,11 +35,6 @@ class QrScannerActivity : BaseActivity() {
                 handleScanResult(result.text)
             }
         })
-        
-        // Zurück-Button
-        findViewById<android.widget.Button>(R.id.backButton).setOnClickListener {
-            finish()
-        }
     }
 
     override fun onResume() {

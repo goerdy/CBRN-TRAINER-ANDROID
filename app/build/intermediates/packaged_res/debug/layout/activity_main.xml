@@ -65,6 +65,14 @@
             android:layout_marginBottom="16dp"/>
 
         <Button
+            android:id="@+id/dlWarnerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dosisleistungswarner"
+            android:drawableEnd="@drawable/ic_bluetooth"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
             android:id="@+id/magnetButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

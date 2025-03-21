@@ -3296,6 +3296,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id dlWarnerButton
 id doseWarnerButton
 id dosisleistungA1Input
 id dosisleistungA2Input
@@ -3823,6 +3824,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_beacon_settings
+layout activity_bluetooth_dl_warn
 layout activity_bluetooth_mode
 layout activity_bluetooth_settings
 layout activity_calibration
@@ -3830,6 +3832,8 @@ layout activity_cloud_dosisleistungsmess
 layout activity_cloud_mode_launcher
 layout activity_cloud_settings
 layout activity_co_warner
+layout activity_dl_warner
+layout activity_dosis_warngeraet
 layout activity_dosisleistungsmess
 layout activity_instructions
 layout activity_magnet_mode

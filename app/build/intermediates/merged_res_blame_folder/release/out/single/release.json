@@ -12,12 +12,12 @@
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_beacon_item.xml.flat",
-        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/beacon_item.xml"
-    },
-    {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-mdpi_ic_launcher.png.flat",
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_beacon_item.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/beacon_item.xml"
     },
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_signal_strength.xml.flat",
@@ -32,6 +32,10 @@
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/activity_cloud_settings.xml"
     },
     {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_custom_scanner.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/custom_scanner.xml"
+    },
+    {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/mipmap-xxhdpi/ic_launcher_round.png"
     },
@@ -44,16 +48,16 @@
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/drawable/ic_delete.xml"
     },
     {
-        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_settings.xml.flat",
-        "source": "de.cbrntrainer.app-main-33:/layout/activity_settings.xml"
-    },
-    {
         "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_qr_scanner.xml.flat",
         "source": "de.cbrntrainer.app-main-33:/layout/activity_qr_scanner.xml"
     },
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_multigas.xml.flat",
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/activity_multigas.xml"
+    },
+    {
+        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_dosis_warngeraet.xml.flat",
+        "source": "de.cbrntrainer.app-main-33:/layout/activity_dosis_warngeraet.xml"
     },
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_main.xml.flat",
@@ -72,8 +76,16 @@
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/drawable/ic_launcher_background.xml"
     },
     {
+        "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_qr_scanner.xml.flat",
+        "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/activity_qr_scanner.xml"
+    },
+    {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_co_warner.xml.flat",
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/activity_co_warner.xml"
+    },
+    {
+        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_dl_warner.xml.flat",
+        "source": "de.cbrntrainer.app-main-33:/layout/activity_dl_warner.xml"
     },
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_item_beacon.xml.flat",
@@ -86,10 +98,6 @@
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_dosisleistungsmess.xml.flat",
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/activity_dosisleistungsmess.xml"
-    },
-    {
-        "merged": "de.cbrntrainer.app-merged_res-32:/layout_custom_scanner.xml.flat",
-        "source": "de.cbrntrainer.app-main-33:/layout/custom_scanner.xml"
     },
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_item_saved_beacon_simple.xml.flat",
@@ -112,24 +120,12 @@
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_instructions.xml.flat",
-        "source": "de.cbrntrainer.app-main-33:/layout/activity_instructions.xml"
-    },
-    {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/layout_activity_magnet_mode.xml.flat",
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/layout/activity_magnet_mode.xml"
     },
     {
-        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_cloud_settings.xml.flat",
-        "source": "de.cbrntrainer.app-main-33:/layout/activity_cloud_settings.xml"
-    },
-    {
-        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_cloud_mode_launcher.xml.flat",
-        "source": "de.cbrntrainer.app-main-33:/layout/activity_cloud_mode_launcher.xml"
-    },
-    {
-        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_beacon_settings.xml.flat",
-        "source": "de.cbrntrainer.app-main-33:/layout/activity_beacon_settings.xml"
+        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_bluetooth_dl_warn.xml.flat",
+        "source": "de.cbrntrainer.app-main-33:/layout/activity_bluetooth_dl_warn.xml"
     },
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_magnet_new.xml.flat",
@@ -150,6 +146,10 @@
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-main-33:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "de.cbrntrainer.app-merged_res-32:/layout_activity_main.xml.flat",
+        "source": "de.cbrntrainer.app-main-33:/layout/activity_main.xml"
     },
     {
         "merged": "/home/goerdy/.gradle/daemon/8.12/de.cbrntrainer.app-merged_res-32:/drawable_ic_exit.xml.flat",

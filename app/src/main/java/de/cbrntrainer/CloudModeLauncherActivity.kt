@@ -64,6 +64,16 @@ class CloudModeLauncherActivity : BaseActivity() {
             launchDeviceActivity(CloudDosisleistungsmessActivity::class.java, sessionIdInput.text.toString())
         }
         
+        // Dosisleistungswarngerät
+        findViewById<Button>(R.id.radiationWarnerButton).setOnClickListener {
+            launchDeviceActivity(DlWarnerActivity::class.java, sessionIdInput.text.toString())
+        }
+        
+        // Dosiswarngerät
+        findViewById<Button>(R.id.doseWarnerButton).setOnClickListener {
+            launchDeviceActivity(DosisWarngeraetActivity::class.java, sessionIdInput.text.toString())
+        }
+        
         // Weitere Buttons...
     }
     
