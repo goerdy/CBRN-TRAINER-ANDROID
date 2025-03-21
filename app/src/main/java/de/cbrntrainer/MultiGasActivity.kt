@@ -27,7 +27,10 @@ class MultiGasActivity : BaseActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_multigas)
+        setContentView(R.layout.activity_multi_gas)
+        
+        // Vollbildmodus für Messgeräte
+        hideSystemUI()
         
         webView = findViewById(R.id.webView)
         webView.settings.javaScriptEnabled = true

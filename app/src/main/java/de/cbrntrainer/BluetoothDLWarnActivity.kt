@@ -44,6 +44,9 @@ class BluetoothDLWarnActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bluetooth_dl_warn)
         
+        // Vollbildmodus für Messgeräte
+        hideSystemUI()
+        
         webView = findViewById(R.id.webView)
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true

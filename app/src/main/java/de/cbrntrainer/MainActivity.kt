@@ -11,6 +11,10 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Stelle sicher, dass die Systemleiste sichtbar ist
+        useFullscreen = false
+        showSystemUI()
+
         // Verarbeite eingehende Intents
         handleIntent(intent)
 
@@ -47,11 +51,6 @@ class MainActivity : BaseActivity() {
         // Info Button
         findViewById<Button>(R.id.infoButton).setOnClickListener {
             startActivity(Intent(this, InstructionsActivity::class.java))
-        }
-
-        // Exit Button
-        findViewById<Button>(R.id.exitButton).setOnClickListener {
-            finish()
         }
 
         // Optional: Programmatischer Zugriff auf das ImageView

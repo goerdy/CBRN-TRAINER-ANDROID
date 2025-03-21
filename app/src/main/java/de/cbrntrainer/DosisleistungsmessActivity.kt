@@ -61,6 +61,9 @@ class DosisleistungsmessActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dosisleistungsmess)
         
+        // Vollbildmodus für Messgeräte
+        hideSystemUI()
+        
         // Initialisiere WebView
         meterWebView = findViewById(R.id.meterWebView)
         meterWebView.settings.apply {

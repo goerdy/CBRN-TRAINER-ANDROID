@@ -18,6 +18,9 @@ class DosisWarngeraetActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dosis_warngeraet)
         
+        // Vollbildmodus für Messgeräte
+        hideSystemUI()
+        
         webView = findViewById(R.id.webView)
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true

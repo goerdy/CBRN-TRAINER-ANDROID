@@ -29,6 +29,9 @@ class CloudDosisleistungsmessActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cloud_dosisleistungsmess)
         
+        // Vollbildmodus für Messgeräte
+        hideSystemUI()
+        
         webView = findViewById(R.id.webView)
         webView.settings.javaScriptEnabled = true
         webView.loadUrl("file:///android_asset/meter.html")

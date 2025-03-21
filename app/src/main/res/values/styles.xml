@@ -3,9 +3,11 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="colorPrimary">#3F51B5</item>
-        <item name="colorPrimaryDark">#303F9F</item>
-        <item name="colorAccent">#FF4081</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/main_background</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/main_background</item>
+        <item name="android:navigationBarColor">@color/main_background</item>
+        <item name="android:statusBarColor">@color/main_background</item>
     </style>
 </resources> 

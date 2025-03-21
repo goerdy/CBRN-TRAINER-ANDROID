@@ -11,12 +11,16 @@ import android.media.SoundPool
 import android.media.ToneGenerator
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.webkit.WebView
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 class MagnetModeActivity : BaseActivity(), SensorEventListener {
@@ -49,6 +53,9 @@ class MagnetModeActivity : BaseActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_magnet_mode)
         
+        // Vollbildmodus für Messgeräte
+        hideSystemUI()
+        
         // Initialisiere WebView
         meterWebView = findViewById(R.id.meterWebView)
         meterWebView.settings.apply {
@@ -78,7 +85,7 @@ class MagnetModeActivity : BaseActivity(), SensorEventListener {
             updateBruttoNettoButton()
         }
         
-        // Initialisiere Sensor
+        // Initialisiere Sensoren
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
         

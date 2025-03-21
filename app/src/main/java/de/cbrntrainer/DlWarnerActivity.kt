@@ -18,6 +18,9 @@ class DlWarnerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dl_warner)
         
+        // Vollbildmodus für Messgeräte
+        hideSystemUI()
+        
         webView = findViewById(R.id.webView)
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
