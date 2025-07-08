@@ -5,6 +5,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 
 open class BaseActivity : AppCompatActivity() {
     
@@ -39,19 +40,14 @@ open class BaseActivity : AppCompatActivity() {
     }
     
     private fun enableFullscreen() {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        // Neue Methode für Edge-to-Edge
+        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
     
     // Methode zum Anzeigen der System-UI
     protected fun showSystemUI() {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        
+        // Neue Methode für Edge-to-Edge
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         // Setze die Farbe der Navigationsleiste und Statusleiste
         window.navigationBarColor = ContextCompat.getColor(this, R.color.main_background)
         window.statusBarColor = ContextCompat.getColor(this, R.color.main_background)

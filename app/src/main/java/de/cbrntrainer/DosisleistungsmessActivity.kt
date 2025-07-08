@@ -29,9 +29,9 @@ class DosisleistungsmessActivity : BaseActivity() {
     private val savedBeacons = mutableListOf<BeaconData>()
     private val beaconRates = mutableMapOf<String, Double>() // Aktuelle Raten pro Beacon
     private val rateWindow = mutableListOf<Double>()  // Speicher für die letzten Messwerte der Gesamtrate
-    private val WINDOW_SIZE = 100  // Größe des Sliding Windows
+    private val WINDOW_SIZE = 50  // Größe des Sliding Windows
     private var lastUpdateTime = 0L
-    private val UPDATE_INTERVAL = 200L  // 200ms = 5 Updates pro Sekunde
+    private val UPDATE_INTERVAL = 800L  // 800ms = < 2 Updates pro Sekunde
     private val SIGNAL_TIMEOUT = 5000L  // 5 Sekunden bis Signal als verloren gilt
     private val beaconLastSeen = mutableMapOf<String, Long>() // Wann wurde ein Beacon zuletzt gesehen
     
@@ -103,8 +103,6 @@ class DosisleistungsmessActivity : BaseActivity() {
         // Starte den Scan, wenn die Berechtigungen vorhanden sind
         if (checkBluetoothPermissions()) {
             startScanning()
-            // Starte einen Timer, um den Scan regelmäßig neu zu starten
-            startScanRefreshTimer()
         } else {
             requestBluetoothPermissions()
         }
@@ -159,7 +157,6 @@ class DosisleistungsmessActivity : BaseActivity() {
         }
         
         android.util.Log.d("DosisleistungsMess", "Starte Scan nach allen gespeicherten Beacons")
-        Toast.makeText(this, "Suche nach Beacons...", Toast.LENGTH_SHORT).show()
         
         // Scan-Einstellungen für kontinuierliches Scannen
         val settings = ScanSettings.Builder()
@@ -171,6 +168,7 @@ class DosisleistungsmessActivity : BaseActivity() {
         bluetoothAdapter.bluetoothLeScanner?.startScan(null, settings, scanCallback)
         isScanning = true
         
+        // Initialisiere die Anzeige mit 0
         runOnUiThread {
             meterWebView.evaluateJavascript(
                 "javascript:updateValue('0.0', 'µSv/h')",
@@ -193,73 +191,80 @@ class DosisleistungsmessActivity : BaseActivity() {
     }
     
     private fun updateBeaconRate(beacon: BeaconData, rssi: Int) {
-        val baseRate = beacon.rate.toDoubleOrNull() ?: 0.0
-        if (baseRate == 0.0) {
-            android.util.Log.d("DosisleistungsMess", "Beacon ${beacon.name} hat Rate 0, wird ignoriert")
-            return
+        // Berechne die Dosisleistung für dieses Beacon
+        val rate = calculateDosisleistung(beacon, rssi)
+        
+        // Speichere die aktuelle Rate für dieses Beacon
+        beaconRates[beacon.address] = rate
+        
+        // Berechne die Gesamtrate (Summe aller aktiven Beacons)
+        val currentTime = System.currentTimeMillis()
+        val totalRate = calculateTotalRate(currentTime)
+        
+        // Aktualisiere die Anzeige, aber nicht zu oft
+        if (currentTime - lastUpdateTime > UPDATE_INTERVAL) {
+            lastUpdateTime = currentTime
+            updateDisplay(totalRate)
         }
-        
-        // Berechne die Entfernung mit dem kalibrierten RSSI-Wert
-        val calibratedRssi = getSharedPreferences("BeaconPrefs", Context.MODE_PRIVATE)
-            .getInt("calibrated_rssi", -59)
-        
-        val pathLossExponent = 2.0
-        val distance = Math.pow(10.0, (calibratedRssi - rssi) / (10.0 * pathLossExponent))
-        
-        // Berechne die aktuelle Dosisleistung nach dem Abstandsquadratgesetz
-        val currentRate = baseRate * Math.pow(0.1 / distance, 2.0)
-        
-        // Begrenze auf 200% der eingestellten Aktivität
-        val limitedRate = currentRate.coerceIn(0.0, baseRate * 2.0)
-        
-        // Aktualisiere die Rate für dieses Beacon
-        beaconRates[beacon.address] = limitedRate
-        
-        // Berechne die Gesamtrate aller Beacons
-        updateTotalRate()
     }
     
-    private fun updateTotalRate() {
-        val currentTime = System.currentTimeMillis()
+    private fun calculateDosisleistung(beacon: BeaconData, rssi: Int): Double {
+        val sharedPreferences = getSharedPreferences("BeaconPrefs", Context.MODE_PRIVATE)
         
-        // Berechne die Summe aller aktuellen Beacon-Raten
+        // Hole den kalibrierten RSSI-Wert für dieses Beacon (RSSI bei 1m Entfernung)
+        val calibratedRssi = sharedPreferences.getInt("${beacon.address}_calibrated_rssi", -59)
+        
+        // Hole die gespeicherte Rate für dieses Beacon (Strahlungswert in 10cm Entfernung in µSv/h)
+        val baseRate = sharedPreferences.getString("${beacon.address}_rate", "5.0")?.toDoubleOrNull() ?: 5.0
+        
+        // Berechne die Entfernung in Metern basierend auf RSSI und kalibriertem Wert
+        val n = 2.0 // Pfadverlustexponent für Freiraumausbreitung
+        val distance = Math.pow(10.0, (calibratedRssi - rssi) / (10.0 * n))
+        
+        // Berechne die Dosisleistung basierend auf dem Abstandsgesetz
+        // Wenn baseRate bei 10cm (0.1m) gemessen wurde, dann müssen wir die Formel anpassen:
+        // Dosisleistung bei Abstand d = baseRate * (0.1/d)²
+        
+        // Umrechnung: Wenn baseRate bei 10cm gilt, wie ist die Rate bei 1m?
+        val rateAt1m = baseRate * Math.pow(0.1/1.0, 2.0) // = baseRate * 0.01
+        
+        // Jetzt können wir die Dosisleistung am aktuellen Abstand berechnen
+        val dosisleistung = rateAt1m * (1.0 / (distance * distance))
+        
+        android.util.Log.d("DosisleistungsMess", 
+            "Beacon: ${beacon.name}, RSSI: $rssi, Kalibrierter RSSI: $calibratedRssi, " +
+            "Abstand: ${String.format("%.2f", distance)}m, " +
+            "Basisrate: $baseRate µSv/h, " +
+            "Dosisleistung: ${String.format("%.4f", dosisleistung)} µSv/h")
+        
+        return dosisleistung
+    }
+    
+    private fun calculateTotalRate(currentTime: Long): Double {
+        // Entferne Beacons, die zu lange nicht gesehen wurden
+        val beaconsToRemove = mutableListOf<String>()
+        for ((address, lastSeen) in beaconLastSeen) {
+            if (currentTime - lastSeen > SIGNAL_TIMEOUT) {
+                beaconsToRemove.add(address)
+                beaconRates.remove(address)
+            }
+        }
+        
+        beaconsToRemove.forEach { beaconLastSeen.remove(it) }
+        
+        // Berechne die Gesamtrate (Summe aller aktiven Beacons)
         val totalRate = beaconRates.values.sum()
         
-        // Füge den neuen Wert zum Window hinzu
+        // Füge den neuen Wert zum Fenster hinzu
         rateWindow.add(totalRate)
         
-        // Entferne den ältesten Wert, wenn das Window voll ist
-        if (rateWindow.size > WINDOW_SIZE) {
+        // Begrenze die Größe des Fensters
+        while (rateWindow.size > WINDOW_SIZE) {
             rateWindow.removeAt(0)
         }
         
-        // Berechne den Durchschnitt der letzten Werte
-        val averageRate = if (rateWindow.isNotEmpty()) {
-            rateWindow.average()
-        } else {
-            totalRate
-        }
-        
-        // Aktualisiere die UI nur alle UPDATE_INTERVAL Millisekunden
-        if (currentTime - lastUpdateTime >= UPDATE_INTERVAL) {
-            runOnUiThread {
-                val (value, unit) = when {
-                    averageRate >= 1.0 -> {
-                        String.format(java.util.Locale.US, "%.3f", averageRate) to "mSv/h"
-                    }
-                    else -> {
-                        String.format(java.util.Locale.US, "%.1f", averageRate * 1000) to "µSv/h"
-                    }
-                }
-                
-                meterWebView.evaluateJavascript(
-                    "javascript:updateValue('$value', '$unit')",
-                    null
-                )
-            }
-            
-            lastUpdateTime = currentTime
-        }
+        // Berechne den geglätteten Wert (Durchschnitt des Fensters)
+        return if (rateWindow.isNotEmpty()) rateWindow.average() else 0.0
     }
     
     private fun startBeaconTimeoutChecker() {
@@ -281,7 +286,8 @@ class DosisleistungsmessActivity : BaseActivity() {
                 
                 // Wenn sich Raten geändert haben, aktualisiere die Gesamtrate
                 if (ratesUpdated) {
-                    updateTotalRate()
+                    val totalRate = calculateTotalRate(currentTime)
+                    updateDisplay(totalRate)
                 }
                 
                 // Plane die nächste Überprüfung
@@ -290,21 +296,6 @@ class DosisleistungsmessActivity : BaseActivity() {
                 }
             }
         }, 1000)
-    }
-    
-    private fun startScanRefreshTimer() {
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                if (isScanning) {
-                    // Stoppe den aktuellen Scan
-                    stopScanning()
-                    // Starte einen neuen Scan
-                    startScanning()
-                    // Plane die nächste Aktualisierung
-                    handler.postDelayed(this, 10000) // Alle 10 Sekunden
-                }
-            }
-        }, 10000) // Erste Aktualisierung nach 10 Sekunden
     }
     
     private fun checkBluetoothPermissions(): Boolean {
@@ -343,7 +334,6 @@ class DosisleistungsmessActivity : BaseActivity() {
                 // Bluetooth wurde aktiviert, starte den Scan
                 if (checkBluetoothPermissions()) {
                     startScanning()
-                    startScanRefreshTimer()
                 } else {
                     requestBluetoothPermissions()
                 }
@@ -356,6 +346,9 @@ class DosisleistungsmessActivity : BaseActivity() {
     
     override fun onResume() {
         super.onResume()
+        // Lade die gespeicherten Beacons
+        loadSavedBeacons()
+        
         if (checkBluetoothPermissions() && !isScanning) {
             startScanning()
         }
@@ -370,6 +363,28 @@ class DosisleistungsmessActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         stopScanning()
+    }
+    
+    // Füge diese Methode hinzu, um die Anzeige zu aktualisieren
+    private fun updateDisplay(rate: Double) {
+        runOnUiThread {
+            val (value, unit) = when {
+                rate >= 1000 -> {
+                    String.format(java.util.Locale.US, "%.3f", rate / 1000) to "Sv/h"
+                }
+                rate >= 1.0 -> {
+                    String.format(java.util.Locale.US, "%.3f", rate) to "mSv/h"
+                }
+                else -> {
+                    String.format(java.util.Locale.US, "%.1f", rate * 1000) to "µSv/h"
+                }
+            }
+            
+            meterWebView.evaluateJavascript(
+                "javascript:updateValue('$value', '$unit')",
+                null
+            )
+        }
     }
     
     companion object {

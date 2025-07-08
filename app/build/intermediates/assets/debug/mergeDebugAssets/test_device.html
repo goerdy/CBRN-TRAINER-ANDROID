@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 16px;
+            font-family: Arial, sans-serif;
+            background: transparent;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .value-row {
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Test-Messgerät</div>
+    <div id="values"></div>
+
+    <script>
+        function updateValues(data) {
+            const container = document.getElementById('values');
+            container.innerHTML = `
+                <div class="value-row">Session ID: ${data.sessionId}</div>
+                <div class="value-row">Dosisleistung: ${data.dosisleistung.toFixed(2)} µSv/h</div>
+                <div class="value-row">Dosis: ${data.dosis.toFixed(2)} µSv</div>
+                <div class="value-row">CO: ${data.co.toFixed(0)} ppm</div>
+                <div class="value-row">CH4: ${data.ch4.toFixed(1)} %UEG</div>
+                <div class="value-row">CO2: ${data.co2.toFixed(2)} VOL%</div>
+                <div class="value-row">O2: ${data.o2.toFixed(1)} VOL%</div>
+                <div class="value-row">iBut: ${data.ibut.toFixed(0)} ppm</div>
+                <div class="value-row">nona: ${data.nona.toFixed(0)} ppm</div>
+                <div class="value-row">H2S: ${data.h2s.toFixed(0)} ppm</div>
+                <div class="value-row">NH3: ${data.nh3.toFixed(0)} ppm</div>
+                <div class="value-row">Entfernung: ${data.distance.toFixed(1)} m</div>
+                <div class="value-row">Quellstärke: ${data.sourceStrength.toFixed(0)} MBq</div>
+            `;
+        }
+
+        // Initial leere Werte anzeigen
+        updateValues({
+            sessionId: "-",
+            dosisleistung: 0,
+            dosis: 0,
+            co: 0,
+            ch4: 0,
+            co2: 0,
+            o2: 21,
+            ibut: 0,
+            nona: 0,
+            h2s: 0,
+            nh3: 0,
+            distance: 0,
+            sourceStrength: 0
+        });
+    </script>
+</body>
+</html> 

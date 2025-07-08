@@ -12,5 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "MyApp"
+
+rootProject.name = "CBRN-TRAINER-ANDROID-1"
 include ':app' 

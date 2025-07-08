@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -24,10 +25,12 @@ class CalibrationActivity : BaseActivity() {
     private lateinit var rssiTextView: TextView
     private lateinit var instructionTextView: TextView
     private lateinit var startButton: Button
+    private lateinit var titleTextView: TextView
     
     private var isCalibrating = false
     private var rssiValues = mutableListOf<Int>()
     private var beaconAddress: String? = null
+    private var beaconName: String? = null
     
     private val handler = Handler(Looper.getMainLooper())
     
@@ -48,18 +51,23 @@ class CalibrationActivity : BaseActivity() {
         rssiTextView = findViewById(R.id.rssiTextView)
         instructionTextView = findViewById(R.id.instructionTextView)
         startButton = findViewById(R.id.startButton)
+        titleTextView = findViewById(R.id.calibrationTitle)
+        
+        // Blende den Zurück-Button aus
+        findViewById<Button>(R.id.backButton).visibility = View.GONE
         
         beaconAddress = intent.getStringExtra("BEACON_ADDRESS")
+        beaconName = intent.getStringExtra("BEACON_NAME")
+        
+        // Setze den Titel mit dem Beacon-Namen
+        val displayName = if (beaconName.isNullOrEmpty()) "Unbekanntes Gerät" else beaconName
+        titleTextView.text = "Kalibrierung: $displayName"
         
         val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = bluetoothManager.adapter
         
         startButton.setOnClickListener {
             startCalibration()
-        }
-        
-        findViewById<Button>(R.id.backButton).setOnClickListener {
-            finish()
         }
     }
     
@@ -110,13 +118,17 @@ class CalibrationActivity : BaseActivity() {
             -59 // Standardwert falls keine Werte gesammelt wurden
         }
         
-        // Speichere den kalibrierten Wert
-        getSharedPreferences("BeaconPrefs", Context.MODE_PRIVATE)
-            .edit()
-            .putInt("calibrated_rssi", averageRssi)
-            .apply()
+        // Speichere den kalibrierten Wert für diesen spezifischen Beacon
+        beaconAddress?.let { address ->
+            getSharedPreferences("BeaconPrefs", Context.MODE_PRIVATE)
+                .edit()
+                .putInt("${address}_calibrated_rssi", averageRssi)
+                .apply()
+            
+            val displayName = if (beaconName.isNullOrEmpty()) "Beacon" else beaconName
+            Toast.makeText(this, "Kalibrierung von $displayName abgeschlossen! Referenz-RSSI: $averageRssi dBm", Toast.LENGTH_LONG).show()
+        } ?: Toast.makeText(this, "Fehler: Keine Beacon-Adresse", Toast.LENGTH_SHORT).show()
         
-        Toast.makeText(this, "Kalibrierung abgeschlossen! Referenz-RSSI: $averageRssi dBm", Toast.LENGTH_LONG).show()
         finish()
     }
     

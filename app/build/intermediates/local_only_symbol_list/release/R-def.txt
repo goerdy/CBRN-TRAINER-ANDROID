@@ -1,12 +1,18 @@
 R_DEF: Internal format may change without notice
 local
 array beacon_types
+color black
+color colorAccent
+color colorPrimary
+color colorPrimaryDark
 color danger
+color gray
 color ic_launcher_background
 color main_background
 color safe
 color scanner_mask
 color warning
+color white
 color zxing_custom_possible_result_points
 color zxing_custom_result_view
 color zxing_custom_viewfinder_laser
@@ -53,7 +59,6 @@ id doseWarnerButton
 id dosisleistungA1Input
 id dosisleistungA2Input
 id dosisleistungsmessButton
-id exitButton
 id h2sA1Input
 id h2sA2Input
 id ibutA1Input
@@ -86,8 +91,10 @@ id rateInput
 id rateLabel
 id removeButton
 id rssi
+id rssiLabel
 id rssiTextView
 id rssiValue
+id rssiValueText
 id saveButton
 id savedBeaconsList
 id savedBeaconsTitle
@@ -126,6 +133,7 @@ layout activity_dosisleistungsmess
 layout activity_instructions
 layout activity_magnet_mode
 layout activity_main
+layout activity_multi_gas
 layout activity_multigas
 layout activity_qr_scanner
 layout activity_session_input

@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "de.cbrntrainer.app-mergeDebugResources-30:/values-he/values-he.xml",
+            "map": [
+                {
+                    "source": "/home/goerdy/.gradle/caches/8.8/transforms/6534e07df636077893d64f2ee2086271/transformed/jetified-zxing-android-embedded-4.3.0/res/values-he/values-he.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,111,161,296",
+                        "endColumns": "55,49,134,89",
+                        "endOffsets": "106,156,291,381"
+                    }
+                }
+            ]
+        }
+    ]
+}

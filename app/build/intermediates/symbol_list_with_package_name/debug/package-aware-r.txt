@@ -3548,8 +3548,10 @@ id right_side
 id rounded
 id row_index_key
 id rssi
+id rssiLabel
 id rssiTextView
 id rssiValue
+id rssiValueText
 id saveButton
 id save_non_transition_alpha
 id save_overlay_view

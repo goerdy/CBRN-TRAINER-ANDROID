@@ -1365,6 +1365,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color black
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1379,6 +1380,9 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color colorAccent
+color colorPrimary
+color colorPrimaryDark
 color danger
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
@@ -1426,6 +1430,7 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color gray
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color ic_launcher_background
@@ -2108,6 +2113,7 @@ color switch_thumb_normal_material_light
 color tooltip_background_dark
 color tooltip_background_light
 color warning
+color white
 color zxing_custom_possible_result_points
 color zxing_custom_result_view
 color zxing_custom_viewfinder_laser
@@ -3323,7 +3329,6 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
-id exitButton
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -3543,8 +3548,10 @@ id right_side
 id rounded
 id row_index_key
 id rssi
+id rssiLabel
 id rssiTextView
 id rssiValue
+id rssiValueText
 id saveButton
 id save_non_transition_alpha
 id save_overlay_view
@@ -3838,6 +3845,7 @@ layout activity_dosisleistungsmess
 layout activity_instructions
 layout activity_magnet_mode
 layout activity_main
+layout activity_multi_gas
 layout activity_multigas
 layout activity_qr_scanner
 layout activity_session_input

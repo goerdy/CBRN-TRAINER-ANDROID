@@ -1,0 +1,47 @@
+{
+    "logs": [
+        {
+            "outputFile": "de.cbrntrainer.app-mergeDebugResources-30:/values-v26/values-v26.xml",
+            "map": [
+                {
+                    "source": "/home/goerdy/CursorProjekte/CBRN-TRAINER-ANDROID-1/app/src/main/res/values-v26/styles.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "16",
+                        "endLines": "10",
+                        "endColumns": "12",
+                        "endOffsets": "641"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "11",
+                        "endColumns": "12",
+                        "endOffsets": "680"
+                    }
+                },
+                {
+                    "source": "/home/goerdy/.gradle/caches/8.8/transforms/4fea31e2d2775c551221d83fba03bf0e/transformed/appcompat-1.6.1/res/values-v26/values-v26.xml",
+                    "from": {
+                        "startLines": "2,3,4,8,12,16",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,130,217,381,557,796",
+                        "endLines": "2,3,7,11,15,16",
+                        "endColumns": "74,86,12,12,12,92",
+                        "endOffsets": "125,212,376,552,791,884"
+                    },
+                    "to": {
+                        "startLines": "12,13,14,18,22,26",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "685,760,847,1011,1187,1426",
+                        "endLines": "12,13,17,21,25,26",
+                        "endColumns": "74,86,12,12,12,92",
+                        "endOffsets": "755,842,1006,1182,1421,1514"
+                    }
+                }
+            ]
+        }
+    ]
+}

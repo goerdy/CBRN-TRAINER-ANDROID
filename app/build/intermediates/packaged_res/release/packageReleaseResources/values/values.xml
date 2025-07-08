@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="beacon_types">
+        <item>Strahler</item>
+        
+    </string-array>
+    <color name="black">#000000</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="danger">#F44336</color>
+    <color name="gray">#808080</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="main_background">#F4AF0C</color>
+    <color name="primary_color">#3F51B5</color>
+    <color name="safe">#4CAF50</color>
+    <color name="scanner_mask">#80000000</color>
+    <color name="secondary_text_color">#666666</color>
+    <color name="warning">#FFC107</color>
+    <color name="white">#FFFFFF</color>
+    <color name="zxing_custom_possible_result_points">#c0ffbd21</color>
+    <color name="zxing_custom_result_view">#b0000000</color>
+    <color name="zxing_custom_viewfinder_laser">#ffcc0000</color>
+    <string name="app_name">CBRN-TRAINER</string>
+    <string name="main_title">CBRN-TRAINER</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/main_background</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/main_background</item>
+        <item name="android:navigationBarColor">@color/main_background</item>
+        <item name="android:statusBarColor">@color/main_background</item>
+    </style>
+</resources>

@@ -22,7 +22,7 @@
         android:id="@+id/beaconInfoText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Beacon-Adresse: AA:BB:CC:DD:EE:FF"
+        android:text="Beacon: Unbekanntes Gerät\nAdresse: AA:BB:CC:DD:EE:FF"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/settingsTitle"/>
 
@@ -46,7 +46,7 @@
         android:id="@+id/rateLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Messrate (µSv/h):"
+        android:text="Messrate in 10cm Entfernung (mSv/h):"
         android:textStyle="bold"
         android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/typeSpinner"/>
@@ -67,5 +67,30 @@
         android:text="Speichern"
         android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/rateInput"/>
+
+    <TextView
+        android:id="@+id/rssiLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kalibrierter RSSI-Wert (1m):"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/saveButton"/>
+
+    <TextView
+        android:id="@+id/rssiValueText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nicht kalibriert"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/rssiLabel"/>
+
+    <Button
+        android:id="@+id/calibrateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kalibrieren"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/rssiValueText"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout> 

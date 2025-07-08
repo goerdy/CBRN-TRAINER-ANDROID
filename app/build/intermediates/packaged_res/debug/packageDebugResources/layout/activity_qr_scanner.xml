@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background">
+
+    <TextView
+        android:id="@+id/scannerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="QR-Code scannen"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/barcode_scanner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:zxing_scanner_layout="@layout/custom_scanner"
+        app:zxing_use_texture_view="true"
+        app:zxing_preview_scaling_strategy="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintTop_toBottomOf="@id/scannerTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginVertical="32dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

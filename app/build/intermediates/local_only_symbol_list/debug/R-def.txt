@@ -91,8 +91,10 @@ id rateInput
 id rateLabel
 id removeButton
 id rssi
+id rssiLabel
 id rssiTextView
 id rssiValue
+id rssiValueText
 id saveButton
 id savedBeaconsList
 id savedBeaconsTitle

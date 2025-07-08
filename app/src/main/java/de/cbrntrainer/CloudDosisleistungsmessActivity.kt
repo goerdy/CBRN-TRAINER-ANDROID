@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.webkit.JavascriptInterface
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import de.cbrntrainer.repository.CloudRepository
 import kotlinx.coroutines.launch
@@ -20,6 +23,7 @@ class CloudDosisleistungsmessActivity : BaseActivity() {
     private var isA2AlarmActive = false
     
     companion object {
+        private const val TAG = "CloudDosisleistungsmess"
         private const val ALARM_DURATION = 500L
         private const val A1_INTERVAL = 2000L
         private const val A2_INTERVAL = 1000L
@@ -32,123 +36,245 @@ class CloudDosisleistungsmessActivity : BaseActivity() {
         // Vollbildmodus für Messgeräte
         hideSystemUI()
         
-        webView = findViewById(R.id.webView)
-        webView.settings.javaScriptEnabled = true
-        webView.loadUrl("file:///android_asset/meter.html")
+        setupWebView()
+        setupSharedPreferences()
+        setupToneGenerator()
         
-        sharedPreferences = getSharedPreferences(CloudSettingsActivity.PREFS_NAME, MODE_PRIVATE)
-        toneGenerator = ToneGenerator(AudioManager.STREAM_ALARM, 100)
+        val sessionId = intent.getStringExtra("SESSION_ID")
+        if (sessionId.isNullOrEmpty()) {
+            Log.e(TAG, "Session ID is null or empty")
+            Toast.makeText(this, "Fehler: Keine Session-ID erhalten", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
         
-        val sessionId = intent.getStringExtra("SESSION_ID") ?: return finish()
+        Log.d(TAG, "Starting with session ID: $sessionId")
         startDataStream(sessionId)
+    }
+    
+    private fun setupWebView() {
+        webView = findViewById(R.id.webView)
+        webView.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            allowFileAccess = true
+        }
+        
+        webView.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                Log.d(TAG, "WebView page loaded: $url")
+                // Initial value setzen
+                updateUI(0.0)
+            }
+            
+            override fun onReceivedError(view: WebView?, errorCode: Int, description: String?, failingUrl: String?) {
+                super.onReceivedError(view, errorCode, description, failingUrl)
+                Log.e(TAG, "WebView error: $errorCode - $description")
+                Toast.makeText(this@CloudDosisleistungsmessActivity, "WebView Fehler: $description", Toast.LENGTH_LONG).show()
+            }
+        }
+        
+        try {
+            webView.loadUrl("file:///android_asset/meter.html")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading WebView", e)
+            Toast.makeText(this, "Fehler beim Laden der Anzeige: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+    
+    private fun setupSharedPreferences() {
+        sharedPreferences = getSharedPreferences(CloudSettingsActivity.PREFS_NAME, MODE_PRIVATE)
+    }
+    
+    private fun setupToneGenerator() {
+        try {
+            toneGenerator = ToneGenerator(AudioManager.STREAM_ALARM, 100)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error creating ToneGenerator", e)
+        }
     }
     
     override fun onDestroy() {
         super.onDestroy()
-        toneGenerator?.release()
+        try {
+            toneGenerator?.release()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error releasing ToneGenerator", e)
+        }
         stopAlarms()
     }
     
     private fun startDataStream(sessionId: String) {
         lifecycleScope.launch {
-            CloudRepository.getInstance(this@CloudDosisleistungsmessActivity)
-                .getDeviceDataFlow(sessionId)
-                .collect { result ->
-                    result.onSuccess { response ->
-                        updateUI(response.data.dosisleistung)
-                    }.onFailure { error ->
-                        stopAlarms()
+            try {
+                CloudRepository.getInstance(this@CloudDosisleistungsmessActivity)
+                    .getDeviceDataFlow(sessionId)
+                    .collect { result ->
+                        // Prüfe, ob die Activity noch aktiv ist
+                        if (isFinishing || isDestroyed) return@collect
+                        
+                        result.onSuccess { response ->
+                            try {
+                                Log.d(TAG, "Received data: ${response.data.dosisleistung}")
+                                updateUI(response.data.dosisleistung)
+                            } catch (e: Exception) {
+                                Log.e(TAG, "Error processing response data", e)
+                                updateUI(0.0) // Fallback to safe value
+                            }
+                        }.onFailure { error ->
+                            Log.e(TAG, "API error", error)
+                            stopAlarms()
+                            // Nur Fehlermeldung zeigen, wenn Activity noch aktiv ist
+                            if (!isFinishing && !isDestroyed) {
+                                runOnUiThread {
+                                    Toast.makeText(this@CloudDosisleistungsmessActivity, 
+                                        "Verbindungsfehler: ${error.message}", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error in data stream", e)
+                // Nur Fehlermeldung zeigen, wenn Activity noch aktiv ist
+                if (!isFinishing && !isDestroyed) {
+                    runOnUiThread {
+                        Toast.makeText(this@CloudDosisleistungsmessActivity, 
+                            "Fehler im Datenstrom: ${e.message}", Toast.LENGTH_LONG).show()
                     }
                 }
+            }
         }
     }
     
     private fun updateUI(value: Double) {
-        // Formatiere den Wert für die Anzeige
-        val formattedValue = formatValue(value)
-        
-        // Update WebView
-        webView.evaluateJavascript(
-            "javascript:updateValue('${formattedValue.first}', '${formattedValue.second}')",
-            null
-        )
-        
-        // Alarme prüfen
-        val a1 = sharedPreferences.getFloat("dosisleistung_a1", CloudSettingsActivity.DOSISLEISTUNG_A1_DEFAULT.toFloat()).toDouble()
-        val a2 = sharedPreferences.getFloat("dosisleistung_a2", CloudSettingsActivity.DOSISLEISTUNG_A2_DEFAULT.toFloat()).toDouble()
-        
-        val alarmLevel = when {
-            value >= a2 -> 2
-            value >= a1 -> 1
-            else -> 0
+        try {
+            // Formatiere den Wert für die Anzeige
+            val formattedValue = formatValue(value)
+            Log.d(TAG, "Updating UI with value: $value -> ${formattedValue.first} ${formattedValue.second}")
+            
+            // Update WebView
+            runOnUiThread {
+                try {
+                    webView.evaluateJavascript(
+                        "javascript:updateValue('${formattedValue.first}', '${formattedValue.second}')",
+                        { result ->
+                            Log.d(TAG, "JavaScript result: $result")
+                        }
+                    )
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error updating WebView", e)
+                }
+            }
+            
+            // Alarme prüfen
+            val a1 = sharedPreferences.getFloat("dosisleistung_a1", CloudSettingsActivity.DOSISLEISTUNG_A1_DEFAULT.toFloat()).toDouble()
+            val a2 = sharedPreferences.getFloat("dosisleistung_a2", CloudSettingsActivity.DOSISLEISTUNG_A2_DEFAULT.toFloat()).toDouble()
+            
+            val alarmLevel = when {
+                value >= a2 -> 2
+                value >= a1 -> 1
+                else -> 0
+            }
+            
+            handleAlarm(alarmLevel)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error in updateUI", e)
         }
-        
-        handleAlarm(alarmLevel)
     }
     
     private fun formatValue(value: Double): Pair<String, String> {
-        val microSv = value * 1000000 // Konvertiere in µSv/h
-        
-        return when {
-            microSv < 999 -> {
-                Pair(String.format("%.2f", microSv), "µSv/h")
+        return try {
+            val microSv = value * 1000000 // Konvertiere in µSv/h
+            
+            when {
+                microSv < 999 -> {
+                    Pair(String.format("%.2f", microSv), "µSv/h")
+                }
+                microSv < 999000 -> {
+                    Pair(String.format("%.2f", microSv / 1000), "mSv/h")
+                }
+                else -> {
+                    Pair(String.format("%.2f", microSv / 1000000), "Sv/h")
+                }
             }
-            microSv < 999000 -> {
-                Pair(String.format("%.2f", microSv / 1000), "mSv/h")
-            }
-            else -> {
-                Pair(String.format("%.2f", microSv / 1000000), "Sv/h")
-            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error formatting value: $value", e)
+            Pair("0.00", "µSv/h")
         }
     }
     
     private fun handleAlarm(alarmLevel: Int) {
-        when (alarmLevel) {
-            2 -> {
-                if (!isA2AlarmActive) {
+        try {
+            when (alarmLevel) {
+                2 -> {
+                    if (!isA2AlarmActive) {
+                        stopAlarms()
+                        isA2AlarmActive = true
+                        playA2Alarm()
+                    }
+                }
+                1 -> {
+                    if (!isA1AlarmActive) {
+                        stopAlarms()
+                        isA1AlarmActive = true
+                        playA1Alarm()
+                    }
+                }
+                else -> {
                     stopAlarms()
-                    isA2AlarmActive = true
-                    playA2Alarm()
                 }
             }
-            1 -> {
-                if (!isA1AlarmActive) {
-                    stopAlarms()
-                    isA1AlarmActive = true
-                    playA1Alarm()
-                }
-            }
-            else -> {
-                stopAlarms()
-            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error handling alarm", e)
         }
     }
     
     private fun playA1Alarm() {
-        handler.post(object : Runnable {
-            override fun run() {
-                if (isA1AlarmActive) {
-                    toneGenerator?.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, ALARM_DURATION.toInt())
-                    handler.postDelayed(this, A1_INTERVAL)
+        try {
+            handler.post(object : Runnable {
+                override fun run() {
+                    if (isA1AlarmActive) {
+                        try {
+                            toneGenerator?.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, ALARM_DURATION.toInt())
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error playing A1 alarm", e)
+                        }
+                        handler.postDelayed(this, A1_INTERVAL)
+                    }
                 }
-            }
-        })
+            })
+        } catch (e: Exception) {
+            Log.e(TAG, "Error setting up A1 alarm", e)
+        }
     }
     
     private fun playA2Alarm() {
-        handler.post(object : Runnable {
-            override fun run() {
-                if (isA2AlarmActive) {
-                    toneGenerator?.startTone(ToneGenerator.TONE_CDMA_EMERGENCY_RINGBACK, ALARM_DURATION.toInt())
-                    handler.postDelayed(this, A2_INTERVAL)
+        try {
+            handler.post(object : Runnable {
+                override fun run() {
+                    if (isA2AlarmActive) {
+                        try {
+                            toneGenerator?.startTone(ToneGenerator.TONE_CDMA_EMERGENCY_RINGBACK, ALARM_DURATION.toInt())
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error playing A2 alarm", e)
+                        }
+                        handler.postDelayed(this, A2_INTERVAL)
+                    }
                 }
-            }
-        })
+            })
+        } catch (e: Exception) {
+            Log.e(TAG, "Error setting up A2 alarm", e)
+        }
     }
     
     private fun stopAlarms() {
-        isA1AlarmActive = false
-        isA2AlarmActive = false
-        handler.removeCallbacksAndMessages(null)
+        try {
+            isA1AlarmActive = false
+            isA2AlarmActive = false
+            handler.removeCallbacksAndMessages(null)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error stopping alarms", e)
+        }
     }
 } 
