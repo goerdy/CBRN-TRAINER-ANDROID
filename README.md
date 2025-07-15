@@ -259,7 +259,7 @@ Dies ist ein **vibecoding-Projekt**, entwickelt in der Cursor IDE mit:
 
 ## 📄 Version
 
-**Aktuelle Version**: 1.7
+**Aktuelle Version**: 1.8
 
 ---
 

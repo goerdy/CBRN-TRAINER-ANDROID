@@ -43,7 +43,7 @@
             // Messwerte anzeigen
             const measurements = [
                 { label: 'iBut', value: values.ibut, unit: 'PPM', format: v => parseInt(v) },
-                { label: 'Nona', value: values.nona, unit: '%UEG', format: v => (v * 100).toFixed(1) },
+                { label: 'Nona', value: values.nona, unit: 'PPM', format: v => parseInt(v) },
                 { label: 'O₂', value: values.o2, unit: 'VOL%', format: v => parseFloat(v).toFixed(1) },
                 { label: 'H₂S', value: values.h2s, unit: 'PPM', format: v => parseInt(v) },
                 { label: 'CO', value: values.co, unit: 'PPM', format: v => parseInt(v) },
