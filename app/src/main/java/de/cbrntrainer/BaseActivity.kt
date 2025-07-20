@@ -6,6 +6,8 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 
 open class BaseActivity : AppCompatActivity() {
     
@@ -14,6 +16,9 @@ open class BaseActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Display immer an lassen (wie bei Medienwiedergabe)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         
         // Standardmäßig Systemelemente anzeigen (kein Vollbild)
         showSystemUI()
@@ -44,13 +49,18 @@ open class BaseActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
     
-    // Methode zum Anzeigen der System-UI
+    // Methode zum Anzeigen der System-UI (Statusbar und Navigation Bar ausgeblendet)
     protected fun showSystemUI() {
-        // Neue Methode für Edge-to-Edge
-        WindowCompat.setDecorFitsSystemWindows(window, true)
-        // Setze die Farbe der Navigationsleiste und Statusleiste
-        window.navigationBarColor = ContextCompat.getColor(this, R.color.main_background)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.main_background)
+        // Vollbildmodus - Statusbar und Navigation Bar ausblenden
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        
+        // Statusbar und Navigation Bar ausblenden
+        val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
+        windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
+        windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
+        
+        // Vollbildmodus aktivieren
+        windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     }
     
     // Methode zum Ausblenden der System-UI (für Messgeräte)

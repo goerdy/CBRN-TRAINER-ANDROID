@@ -39,12 +39,32 @@
                     android:textColor="@color/primary_color"
                     android:layout_marginBottom="8dp"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Version 1.9"
-                    android:textSize="16sp"
-                    android:textColor="@color/secondary_text_color"/>
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Version 2.0"
+                        android:textSize="16sp"
+                        android:textColor="@color/secondary_text_color"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BETA"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="#FF0000"
+                        android:rotation="-15"
+                        android:background="@drawable/beta_background"
+                        android:padding="3dp"
+                        android:layout_marginStart="8dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
