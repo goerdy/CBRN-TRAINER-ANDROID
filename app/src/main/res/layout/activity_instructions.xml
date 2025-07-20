@@ -42,7 +42,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Version 1.8"
+                    android:text="Version 1.9"
                     android:textSize="16sp"
                     android:textColor="@color/secondary_text_color"/>
 
@@ -212,7 +212,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Philipp &quot;goerdy&quot; Gürth"
-                    android:textSize="16sp"
+            android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="4dp"/>
 
