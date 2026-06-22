@@ -1,10 +1,8 @@
 package de.cbrntrainer
 
-import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.ScanCallback
-import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
 import android.content.Context
@@ -15,12 +13,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.webkit.WebView
-import android.widget.Button
-import android.widget.ProgressBar
 import android.widget.Toast
-import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -118,32 +111,27 @@ class SignalStrengthActivity : BaseActivity() {
         }
         
         // Starte den Scan, wenn die Berechtigungen vorhanden sind
-        if (checkBluetoothPermissions()) {
+        if (BluetoothPermissionHelper.hasPermissions(this)) {
             startScanning()
             // Starte einen Timer, um den Scan regelmäßig neu zu starten
             startScanRefreshTimer()
         } else {
-            requestBluetoothPermissions()
+            BluetoothPermissionHelper.requestPermissions(this, REQUEST_BLUETOOTH_PERMISSIONS)
         }
     }
     
     private fun startScanning() {
         if (isScanning) return
         
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-            requestBluetoothPermissions()
+        if (!BluetoothPermissionHelper.hasPermissions(this)) {
+            BluetoothPermissionHelper.requestPermissions(this, REQUEST_BLUETOOTH_PERMISSIONS)
             return
         }
         
         // Überprüfen, ob Bluetooth aktiviert ist
         if (!bluetoothAdapter.isEnabled) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-            } else {
-                Toast.makeText(this, "Bluetooth-Berechtigungen werden benötigt", Toast.LENGTH_LONG).show()
-                requestBluetoothPermissions()
-            }
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
             return
         }
         
@@ -189,8 +177,10 @@ class SignalStrengthActivity : BaseActivity() {
     private fun stopScanning() {
         if (!isScanning) return
         
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
+        try {
             bluetoothAdapter.bluetoothLeScanner?.stopScan(scanCallback)
+        } catch (e: SecurityException) {
+            android.util.Log.e("SignalStrength", "Fehler beim Stoppen des Scans: ${e.message}")
         }
         
         isScanning = false
@@ -273,24 +263,6 @@ class SignalStrengthActivity : BaseActivity() {
         lastSuccessfulScanTime = currentTime
     }
     
-    private fun checkBluetoothPermissions(): Boolean {
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED &&
-               ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
-               ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-    }
-    
-    private fun requestBluetoothPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(
-                Manifest.permission.BLUETOOTH_SCAN,
-                Manifest.permission.BLUETOOTH_CONNECT,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
-            REQUEST_BLUETOOTH_PERMISSIONS
-        )
-    }
-    
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_BLUETOOTH_PERMISSIONS) {
@@ -304,7 +276,7 @@ class SignalStrengthActivity : BaseActivity() {
     
     override fun onResume() {
         super.onResume()
-        if (checkBluetoothPermissions() && !isScanning) {
+        if (BluetoothPermissionHelper.hasPermissions(this) && !isScanning) {
             startScanning()
         }
     }
@@ -340,11 +312,11 @@ class SignalStrengthActivity : BaseActivity() {
         if (requestCode == REQUEST_ENABLE_BT) {
             if (resultCode == RESULT_OK) {
                 // Bluetooth wurde aktiviert, starte den Scan
-                if (checkBluetoothPermissions()) {
+                if (BluetoothPermissionHelper.hasPermissions(this)) {
                     startScanning()
                     startScanRefreshTimer()
                 } else {
-                    requestBluetoothPermissions()
+                    BluetoothPermissionHelper.requestPermissions(this, REQUEST_BLUETOOTH_PERMISSIONS)
                 }
             } else {
                 Toast.makeText(this, "Bluetooth muss aktiviert sein, um die Signalstärke zu messen", Toast.LENGTH_LONG).show()

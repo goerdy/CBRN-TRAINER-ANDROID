@@ -29,12 +29,12 @@ class OnboardingAdapter : RecyclerView.Adapter<OnboardingAdapter.OnboardingViewH
         OnboardingSlide(
             "Bluetooth-Modus",
             "Benötigt Bluetooth Low Energy Beacons.\n\nRealistische Simulation mit physischen Beacons.\nEinstellbare Strahlungsquellen-Aktivität.",
-            R.drawable.dosisleistungsmessung
+            R.drawable.cbrn_trainer_logo
         ),
         OnboardingSlide(
             "Kontaminationsnachweis",
             "Benötigt Gerätekompass* + Neodym-Magnete\n\nSimulation von Kontaminationsnachweisgeräten\nNeodym-Magnete sind deutlich besser geeignet\n\n*Nicht in jedem Smartphone verbaut!",
-            R.drawable.kontaminationsnachweis
+            R.drawable.cbrn_trainer_logo
         ),
         OnboardingSlide(
             "Support & Hilfe",
@@ -44,7 +44,7 @@ class OnboardingAdapter : RecyclerView.Adapter<OnboardingAdapter.OnboardingViewH
         OnboardingSlide(
             "Los geht's!",
             "Sie sind bereit für Ihre erste Übung!\n\nWählen Sie einen Modus und starten Sie mit der Ausbildung.",
-            R.drawable.kontamination_einsatz
+            R.drawable.cbrn_trainer_logo
         )
     )
     

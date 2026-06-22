@@ -25,6 +25,10 @@ out/
 # Gradle files
 .gradle/
 build/
+app/build/
+**/build/
+/*/build/
+*.pyc
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -104,3 +108,5 @@ lint/tmp/
 .Trashes
 ehthumbs.db
 Thumbs.db 
+
+local.properties
