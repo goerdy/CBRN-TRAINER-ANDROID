@@ -1,6 +1,5 @@
 package de.cbrntrainer
 
-import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.ScanCallback
@@ -15,8 +14,6 @@ import android.os.Looper
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -160,20 +157,19 @@ class BluetoothSettingsActivity : BaseActivity() {
         findViewById<Button>(R.id.scanButton).setOnClickListener {
             if (!bluetoothAdapter.isEnabled) {
                 // Bluetooth aktivieren
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+                if (BluetoothPermissionHelper.hasPermissions(this)) {
                     val enableBtIntent = android.content.Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE)
                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
                 } else {
-                    Toast.makeText(this, "Bluetooth-Berechtigungen werden benötigt", Toast.LENGTH_LONG).show()
-                    requestBluetoothPermissions()
+                    BluetoothPermissionHelper.requestPermissions(this, REQUEST_BLUETOOTH_PERMISSIONS)
                 }
                 return@setOnClickListener
             }
             
-            if (checkBluetoothPermissions()) {
+            if (BluetoothPermissionHelper.hasPermissions(this)) {
                 startBleScan()
             } else {
-                requestBluetoothPermissions()
+                BluetoothPermissionHelper.requestPermissions(this, REQUEST_BLUETOOTH_PERMISSIONS)
             }
         }
         
@@ -188,10 +184,10 @@ class BluetoothSettingsActivity : BaseActivity() {
         if (requestCode == REQUEST_ENABLE_BT) {
             if (resultCode == RESULT_OK) {
                 // Bluetooth wurde aktiviert, starte den Scan
-                if (checkBluetoothPermissions()) {
+                if (BluetoothPermissionHelper.hasPermissions(this)) {
                     startBleScan()
                 } else {
-                    requestBluetoothPermissions()
+                    BluetoothPermissionHelper.requestPermissions(this, REQUEST_BLUETOOTH_PERMISSIONS)
                 }
             } else {
                 Toast.makeText(this, "Bluetooth muss aktiviert sein, um Beacons zu scannen", Toast.LENGTH_LONG).show()
@@ -200,32 +196,32 @@ class BluetoothSettingsActivity : BaseActivity() {
     }
     
     private fun startBleScan() {
-        if (!checkBluetoothPermissions()) {
-            requestBluetoothPermissions()
+        if (!BluetoothPermissionHelper.hasPermissions(this)) {
+            BluetoothPermissionHelper.requestPermissions(this, REQUEST_BLUETOOTH_PERMISSIONS)
             return
         }
-        
+
         // Liste leeren beim Start eines neuen Scans
         discoveredBeacons.clear()
         beaconListAdapter.notifyDataSetChanged()
-        
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
-            isScanning = true
-            bluetoothAdapter.bluetoothLeScanner?.startScan(scanCallback)
-            logDebug("Bluetooth-Scan gestartet")
-            
-            // Stoppe den Scan nach SCAN_PERIOD
-            scanHandler.postDelayed({
-                stopBleScan()
-            }, SCAN_PERIOD)
-        }
+
+        isScanning = true
+        bluetoothAdapter.bluetoothLeScanner?.startScan(scanCallback)
+        logDebug("Bluetooth-Scan gestartet")
+
+        // Stoppe den Scan nach SCAN_PERIOD
+        scanHandler.postDelayed({
+            stopBleScan()
+        }, SCAN_PERIOD)
     }
-    
+
     private fun stopBleScan() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
-            isScanning = false
+        isScanning = false
+        try {
             bluetoothAdapter.bluetoothLeScanner?.stopScan(scanCallback)
             logDebug("Bluetooth-Scan gestoppt")
+        } catch (e: SecurityException) {
+            logDebug("Fehler beim Stoppen des Scans: ${e.message}")
         }
     }
     
@@ -273,24 +269,6 @@ class BluetoothSettingsActivity : BaseActivity() {
         }
     }
     
-    private fun checkBluetoothPermissions(): Boolean {
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED &&
-               ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
-               ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-    }
-    
-    private fun requestBluetoothPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(
-                Manifest.permission.BLUETOOTH_SCAN,
-                Manifest.permission.BLUETOOTH_CONNECT,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
-            REQUEST_BLUETOOTH_PERMISSIONS
-        )
-    }
-    
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_BLUETOOTH_PERMISSIONS) {
@@ -324,4 +302,4 @@ class BluetoothSettingsActivity : BaseActivity() {
         private const val REQUEST_BLUETOOTH_PERMISSIONS = 1
         private const val REQUEST_ENABLE_BT = 2
     }
-} 
+}

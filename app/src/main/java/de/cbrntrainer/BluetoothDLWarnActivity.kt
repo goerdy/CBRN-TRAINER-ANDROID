@@ -78,11 +78,7 @@ class BluetoothDLWarnActivity : BaseActivity() {
         // Bluetooth aktivieren, falls nicht aktiv
         if (!bluetoothAdapter.isEnabled) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-            } else {
-                Toast.makeText(this, "Bluetooth-Berechtigung fehlt", Toast.LENGTH_SHORT).show()
-            }
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
         } else {
             // Starte Bluetooth-Scan
             startScan()
@@ -103,23 +99,8 @@ class BluetoothDLWarnActivity : BaseActivity() {
     }
     
     private fun checkAndRequestPermissions() {
-        val permissions = mutableListOf<String>()
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(android.Manifest.permission.BLUETOOTH_SCAN)
-            }
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(android.Manifest.permission.BLUETOOTH_CONNECT)
-            }
-        }
-        
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-        
-        if (permissions.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), REQUEST_PERMISSIONS)
+        if (!BluetoothPermissionHelper.hasPermissions(this)) {
+            BluetoothPermissionHelper.requestPermissions(this, REQUEST_PERMISSIONS)
         }
     }
     
@@ -147,8 +128,8 @@ class BluetoothDLWarnActivity : BaseActivity() {
     private fun startScan() {
         if (isScanning) return
         
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Bluetooth-Scan-Berechtigung fehlt", Toast.LENGTH_SHORT).show()
+        if (!BluetoothPermissionHelper.hasPermissions(this)) {
+            checkAndRequestPermissions()
             return
         }
         
@@ -165,9 +146,13 @@ class BluetoothDLWarnActivity : BaseActivity() {
             handler.postDelayed(object : Runnable {
                 override fun run() {
                     if (isScanning) {
-                        bluetoothLeScanner.stopScan(scanCallback)
-                        bluetoothLeScanner.startScan(null, scanSettings, scanCallback)
-                        handler.postDelayed(this, SCAN_PERIOD)
+                        try {
+                            bluetoothLeScanner.stopScan(scanCallback)
+                            bluetoothLeScanner.startScan(null, scanSettings, scanCallback)
+                            handler.postDelayed(this, SCAN_PERIOD)
+                        } catch (e: SecurityException) {
+                            Log.e(TAG, "SecurityException beim Scan-Restart", e)
+                        }
                     }
                 }
             }, SCAN_PERIOD)
@@ -181,16 +166,12 @@ class BluetoothDLWarnActivity : BaseActivity() {
     private fun stopScan() {
         if (!isScanning) return
         
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-            return
-        }
-        
         try {
             bluetoothLeScanner.stopScan(scanCallback)
             isScanning = false
             handler.removeCallbacksAndMessages(null)
         } catch (e: Exception) {
-            Log.e(TAG, "Fehler beim Stoppen des Bluetooth-Scans", e)
+            Log.e(TAG, "Fehler beim Stoppen des Scans", e)
         }
     }
     

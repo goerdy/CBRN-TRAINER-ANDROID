@@ -1,6 +1,5 @@
 package de.cbrntrainer
 
-import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.ScanCallback
@@ -16,7 +15,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 
 class CalibrationActivity : BaseActivity() {
 
@@ -72,8 +70,8 @@ class CalibrationActivity : BaseActivity() {
     }
     
     private fun startCalibration() {
-        if (!checkBluetoothPermissions()) {
-            requestBluetoothPermissions()
+        if (!BluetoothPermissionHelper.hasPermissions(this)) {
+            BluetoothPermissionHelper.requestPermissions(this, REQUEST_BLUETOOTH_PERMISSIONS)
             return
         }
         
@@ -86,9 +84,7 @@ class CalibrationActivity : BaseActivity() {
             .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             .build()
         
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
-            bluetoothAdapter.bluetoothLeScanner?.startScan(null, settings, scanCallback)
-        }
+        bluetoothAdapter.bluetoothLeScanner?.startScan(null, settings, scanCallback)
         
         // Starte den Countdown
         object : CountDownTimer(20000, 1000) {
@@ -107,8 +103,10 @@ class CalibrationActivity : BaseActivity() {
     
     private fun finishCalibration() {
         isCalibrating = false
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
+        try {
             bluetoothAdapter.bluetoothLeScanner?.stopScan(scanCallback)
+        } catch (e: SecurityException) {
+            android.util.Log.e("Calibration", "Fehler beim Stoppen des Scans: ${e.message}")
         }
         
         // Berechne den Durchschnitt der RSSI-Werte
@@ -130,24 +128,6 @@ class CalibrationActivity : BaseActivity() {
         } ?: Toast.makeText(this, "Fehler: Keine Beacon-Adresse", Toast.LENGTH_SHORT).show()
         
         finish()
-    }
-    
-    private fun checkBluetoothPermissions(): Boolean {
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED &&
-               ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
-               ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-    }
-    
-    private fun requestBluetoothPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(
-                Manifest.permission.BLUETOOTH_SCAN,
-                Manifest.permission.BLUETOOTH_CONNECT,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
-            REQUEST_BLUETOOTH_PERMISSIONS
-        )
     }
     
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
