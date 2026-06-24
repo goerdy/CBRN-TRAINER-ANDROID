@@ -75,7 +75,7 @@ class DlWarnerActivity : BaseActivity() {
         }
         
         try {
-            webView.loadUrl("file:///android_asset/dlwarner.html")
+        webView.loadUrl("file:///android_asset/dlwarner.html")
         } catch (e: Exception) {
             Log.e(TAG, "Error loading WebView", e)
             Toast.makeText(this, "Fehler beim Laden der Anzeige: ${e.message}", Toast.LENGTH_LONG).show()
@@ -107,16 +107,16 @@ class DlWarnerActivity : BaseActivity() {
     private fun startDataStream(sessionId: String) {
         lifecycleScope.launch {
             try {
-                CloudRepository.getInstance(this@DlWarnerActivity)
-                    .getDeviceDataFlow(sessionId)
-                    .collect { result ->
+            CloudRepository.getInstance(this@DlWarnerActivity)
+                .getDeviceDataFlow(sessionId)
+                .collect { result ->
                         // Prüfe, ob die Activity noch aktiv ist
                         if (isFinishing || isDestroyed) return@collect
                         
-                        result.onSuccess { response ->
+                    result.onSuccess { response ->
                             try {
                                 Log.d(TAG, "Received DL data: ${response.data.dosisleistung}")
-                                updateUI(response.data.dosisleistung)
+                        updateUI(response.data.dosisleistung)
                             } catch (e: Exception) {
                                 Log.e(TAG, "Error processing response data", e)
                                 updateUI(0.0) // Fallback to safe value
@@ -141,8 +141,8 @@ class DlWarnerActivity : BaseActivity() {
                         Toast.makeText(this@DlWarnerActivity, 
                             "Fehler im Datenstrom: ${e.message}", Toast.LENGTH_LONG).show()
                     }
+                    }
                 }
-            }
         }
     }
     
@@ -150,11 +150,11 @@ class DlWarnerActivity : BaseActivity() {
         try {
             Log.d(TAG, "Updating UI with DL value: $value")
             
-            // Update WebView mit dem Wert
+        // Update WebView mit dem Wert
             runOnUiThread {
                 try {
-                    webView.evaluateJavascript(
-                        "javascript:updateValue($value)",
+        webView.evaluateJavascript(
+            "javascript:updateValue($value)",
                         { result ->
                             Log.d(TAG, "JavaScript result: $result")
                         }

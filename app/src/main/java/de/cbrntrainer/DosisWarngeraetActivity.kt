@@ -75,7 +75,7 @@ class DosisWarngeraetActivity : BaseActivity() {
         }
         
         try {
-            webView.loadUrl("file:///android_asset/dosiswarngeraet.html")
+        webView.loadUrl("file:///android_asset/dosiswarngeraet.html")
         } catch (e: Exception) {
             Log.e(TAG, "Error loading WebView", e)
             Toast.makeText(this, "Fehler beim Laden der Anzeige: ${e.message}", Toast.LENGTH_LONG).show()
@@ -119,16 +119,16 @@ class DosisWarngeraetActivity : BaseActivity() {
     private fun startDataStream(sessionId: String) {
         lifecycleScope.launch {
             try {
-                CloudRepository.getInstance(this@DosisWarngeraetActivity)
-                    .getDeviceDataFlow(sessionId)
-                    .collect { result ->
+            CloudRepository.getInstance(this@DosisWarngeraetActivity)
+                .getDeviceDataFlow(sessionId)
+                .collect { result ->
                         // Prüfe, ob die Activity noch aktiv ist
                         if (isFinishing || isDestroyed) return@collect
                         
-                        result.onSuccess { response ->
+                    result.onSuccess { response ->
                             try {
                                 Log.d(TAG, "Received dose data: ${response.data.dosis}")
-                                updateUI(response.data.dosis)
+                        updateUI(response.data.dosis)
                             } catch (e: Exception) {
                                 Log.e(TAG, "Error processing response data", e)
                                 updateUI(0.0) // Fallback to safe value
@@ -153,8 +153,8 @@ class DosisWarngeraetActivity : BaseActivity() {
                         Toast.makeText(this@DosisWarngeraetActivity, 
                             "Fehler im Datenstrom: ${e.message}", Toast.LENGTH_LONG).show()
                     }
+                    }
                 }
-            }
         }
     }
     
@@ -162,14 +162,14 @@ class DosisWarngeraetActivity : BaseActivity() {
         try {
             Log.d(TAG, "Updating UI with dose value: $value")
             
-            // Update WebView mit dem Wert
+        // Update WebView mit dem Wert
             runOnUiThread {
                 try {
-                    webView.evaluateJavascript(
-                        "javascript:updateValue($value)",
+        webView.evaluateJavascript(
+            "javascript:updateValue($value)",
                         { result ->
                             Log.d(TAG, "JavaScript result: $result")
-                        }
+    }
                     )
                 } catch (e: Exception) {
                     Log.e(TAG, "Error updating WebView", e)
@@ -215,7 +215,7 @@ class DosisWarngeraetActivity : BaseActivity() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error handling alarm", e)
-        }
+    }
     }
     
     private fun playA1Alarm() {

@@ -19,5 +19,18 @@ class SettingsActivity : BaseActivity() {
         findViewById<Button>(R.id.cloudSettingsButton).setOnClickListener {
             startActivity(Intent(this, CloudSettingsActivity::class.java))
         }
+
+        // Onboarding wiederholen Button
+        findViewById<Button>(R.id.onboardingButton).setOnClickListener {
+            // Lösche das Onboarding-Flag
+            getSharedPreferences("app_prefs", MODE_PRIVATE)
+                .edit()
+                .putBoolean("onboarding_completed", false)
+                .apply()
+
+            // Starte Onboarding
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish()
+        }
     }
-} 
+}

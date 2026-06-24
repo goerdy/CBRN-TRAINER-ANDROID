@@ -9,6 +9,24 @@ import android.widget.Toast
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Prüfe, ob Onboarding bereits abgeschlossen wurde
+        val onboardingCompleted = getSharedPreferences("app_prefs", MODE_PRIVATE)
+            .getBoolean("onboarding_completed", false)
+
+        if (!onboardingCompleted) {
+            val onboardingIntent = Intent(this, OnboardingActivity::class.java)
+            if (intent.action == Intent.ACTION_VIEW && intent.data != null) {
+                onboardingIntent.putExtra(OnboardingActivity.EXTRA_PENDING_ACTION, intent.action)
+                onboardingIntent.putExtra(OnboardingActivity.EXTRA_PENDING_DATA, intent.dataString)
+            }
+
+            // Starte Onboarding
+            startActivity(onboardingIntent)
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_main)
 
         // Stelle sicher, dass die Systemleiste sichtbar ist
@@ -54,7 +72,7 @@ class MainActivity : BaseActivity() {
         }
 
         // Optional: Programmatischer Zugriff auf das ImageView
-        val imageView = findViewById<ImageView>(R.id.mainImage)
+        findViewById<ImageView>(R.id.mainImage)
         // Hier kannst du weitere Anpassungen am ImageView vornehmen
     }
 
@@ -79,17 +97,17 @@ class MainActivity : BaseActivity() {
                     // Beispiel: cbrn-trainer://session/1234
                     host == "session" && !path.isNullOrEmpty() -> {
                         val sessionId = path.substring(1) // Entferne den führenden "/"
-                        val intent = Intent(this, WebViewActivity::class.java)
-                        intent.putExtra("SESSION_ID", sessionId)
-                        startActivity(intent)
+                        val launchIntent = Intent(this, WebViewActivity::class.java)
+                        launchIntent.putExtra("SESSION_ID", sessionId)
+                        startActivity(launchIntent)
                     }
                     
                     // Beispiel: cbrn-trainer://bluetooth/AA:BB:CC:DD:EE:FF
                     host == "bluetooth" && !path.isNullOrEmpty() -> {
                         val beaconAddress = path.substring(1)
-                        val intent = Intent(this, BluetoothModeActivity::class.java)
-                        intent.putExtra("BEACON_ADDRESS", beaconAddress)
-                        startActivity(intent)
+                        val launchIntent = Intent(this, BluetoothModeActivity::class.java)
+                        launchIntent.putExtra("BEACON_ADDRESS", beaconAddress)
+                        startActivity(launchIntent)
                     }
                     
                     // Fallback
@@ -104,4 +122,4 @@ class MainActivity : BaseActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-} 
+}

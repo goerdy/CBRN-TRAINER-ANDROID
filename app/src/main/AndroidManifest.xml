@@ -37,6 +37,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".OnboardingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
         <activity android:name=".SignalStrengthActivity" 
                   android:screenOrientation="portrait"
                   android:exported="false"/>

@@ -1,6 +1,7 @@
 package de.cbrntrainer
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -11,6 +12,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 import android.view.ViewGroup
 
 class OnboardingActivity : AppCompatActivity() {
+    companion object {
+        const val EXTRA_PENDING_ACTION = "pending_action"
+        const val EXTRA_PENDING_DATA = "pending_data"
+    }
+
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var skipButton: Button
@@ -83,9 +89,13 @@ class OnboardingActivity : AppCompatActivity() {
             .edit()
             .putBoolean("onboarding_completed", true)
             .apply()
-        
+
+        val mainIntent = Intent(this, MainActivity::class.java)
+        intent.getStringExtra(EXTRA_PENDING_ACTION)?.let { mainIntent.action = it }
+        intent.getStringExtra(EXTRA_PENDING_DATA)?.let { mainIntent.data = Uri.parse(it) }
+
         // Starte MainActivity
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(mainIntent)
         finish()
     }
-} 
+}
