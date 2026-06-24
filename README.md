@@ -259,8 +259,8 @@ Dies ist ein **vibecoding-Projekt**, entwickelt in der Cursor IDE mit:
 
 ## 📄 Version
 
-**Aktuelle Version**: 1.8
+**Aktuelle Version**: 2.2
 
 ---
 
-*Entwickelt für die Ausbildung und Sicherheit im ABC/CBRN-Bereich* 
+*Entwickelt für die Ausbildung und Sicherheit im ABC/CBRN-Bereich*
